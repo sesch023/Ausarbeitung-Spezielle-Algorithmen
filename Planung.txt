@@ -1,0 +1,25 @@
+1.	Einleitung |Mario|
+2.	Theoretische Grundlagen |Sebastian|
+	a.	Allgemeine Grundlagen der K.I.
+		i.	Arten des maschinellen Lernens (Klassifikation, Regression, usw.)
+		ii.	Datenvorverarbeitung (Skalierungs- und Normalisierungsverfahren)
+		iii.	Modelle (kurz und knapp ggf. einige Beispiele typischer Verfahren kurz genannt)
+		iv.	Auswertungsverfahren (Qualitätsmaße, Validierungs- und Testverfahren)
+	b.	Neuronale Netze (Grundlagen von NNs)
+	c.	CNNs 
+		i.	Allgemein (Grundlagen von CNNs)
+		ii.	Transferlearning (Transferlearning  allgemein, VGG19 und andere)
+3.	Verwendete Datensätze (Allgemeine Infos) |Mario|
+	a.	Kaggle Gebärdensprache (28x28 Grayscale)
+	b.	Kaggle ASL (200x200 RGB)
+	c.	Videodaten ggf.
+4.	Entwicklungsprozess |Sebastian und Mario|
+	a.	Entwickelte Modelle |Sebastian|
+		i.	NNs
+		ii.	CNNs
+		iii.	VGG19
+	b.	Backend der Webanwendung |Mario|
+	c.	Frontend der Webanwendung |Mario|
+	d.	Fazit der Entwicklung |Mario|
+5.	Fazit |Mario|
+6.	Ausblick |Mario|
