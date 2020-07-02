@@ -16,5 +16,86 @@
   {}
 \endgroup
 
-\datalist[entry]{none/global//global/global}\enddatalist
+\datalist[entry]{none/global//global/global}
+  \entry{MACHINE_LEARNING}{book}{}
+    \name{author}{1}{}{%
+      {{hash=GA}{%
+         family={Geron},
+         familyi={G\bibinitperiod},
+         given={Aurelien},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {O'Reilly}%
+    }
+    \strng{namehash}{GA1}
+    \strng{fullhash}{GA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-3-96009-061-8}
+    \field{title}{Praxiseinstieg: Machine Learning mit Scikit-Learn \&
+  TensorFlow}
+    \list{location}{1}{%
+      {Heidelberg}%
+    }
+    \field{year}{2018}
+  \endentry
+
+  \entry{DEEP_LEARNING}{book}{}
+    \name{author}{2}{}{%
+      {{hash=PJ}{%
+         family={Patterson},
+         familyi={P\bibinitperiod},
+         given={Josh},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Gibson},
+         familyi={G\bibinitperiod},
+         given={Adam},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {O'Reilly}%
+    }
+    \strng{namehash}{PJGA1}
+    \strng{fullhash}{PJGA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-1-491-91425-0}
+    \field{title}{Deep Learning: A Practitioner's Approach}
+    \list{location}{1}{%
+      {Sebastopol}%
+    }
+    \field{year}{2017}
+  \endentry
+
+  \entry{BA}{thesis}{}
+    \name{author}{1}{}{%
+      {{hash=SS}{%
+         family={Schmidt},
+         familyi={S\bibinitperiod},
+         given={Sebastian},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SS1}
+    \strng{fullhash}{SS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Automatische Analyse von Stimmmerkmalen zur Vorhersage von
+  Persönlichkeitsprofilen mittels Künstlicher Intelligenz}
+    \list{location}{1}{%
+      {Iserlohn}%
+    }
+    \list{institution}{1}{%
+      {Fachhochschule Südwestfalen}%
+    }
+    \field{day}{25}
+    \field{month}{10}
+    \field{year}{2019}
+  \endentry
+\enddatalist
 \endinput
