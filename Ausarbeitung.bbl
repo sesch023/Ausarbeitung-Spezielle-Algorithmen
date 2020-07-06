@@ -97,5 +97,119 @@
     \field{month}{10}
     \field{year}{2019}
   \endentry
+
+  \entry{RAUSCH}{thesis}{}
+    \name{author}{2}{}{%
+      {{hash=YJ}{%
+         family={Yim},
+         familyi={Y\bibinitperiod},
+         given={Jonghwa},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SKA}{%
+         family={Sohn},
+         familyi={S\bibinitperiod},
+         given={Kyung-Ah},
+         giveni={K\bibinitperiod-A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YJSKA1}
+    \strng{fullhash}{YJSKA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Enhancing the Performance of Convolutional Neural Networkson
+  QualityDegraded Datasets}
+    \verb{url}
+    \verb https://arxiv.org/ftp/arxiv/papers/1710/1710.06805.pdf
+    \endverb
+    \list{location}{1}{%
+      {Suwon, Korea}%
+    }
+    \list{institution}{1}{%
+      {Department of Computer Engineering: Ajou University}%
+    }
+    \field{day}{18}
+    \field{month}{10}
+    \field{year}{2017}
+    \field{urlday}{05}
+    \field{urlmonth}{07}
+    \field{urlyear}{2020}
+  \endentry
+
+  \entry{MEDIAPIPE}{online}{}
+    \name{author}{1}{}{%
+      {{hash=LG}{%
+         family={LLC},
+         familyi={L\bibinitperiod},
+         given={Google},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LG1}
+    \strng{fullhash}{LG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Cross-platform ML solutions made simple}
+    \verb{url}
+    \verb https://google.github.io/mediapipe/
+    \endverb
+    \field{urlday}{05}
+    \field{urlmonth}{07}
+    \field{urlyear}{2020}
+  \endentry
+
+  \entry{SCALE}{thesis}{}
+    \name{author}{5}{}{%
+      {{hash=QE}{%
+         family={Quiring},
+         familyi={Q\bibinitperiod},
+         given={Erwin},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=KD}{%
+         family={Klein},
+         familyi={K\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=AD}{%
+         family={Arp},
+         familyi={A\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=JM}{%
+         family={Johns},
+         familyi={J\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=RK}{%
+         family={Rieck},
+         familyi={R\bibinitperiod},
+         given={Konrad},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{QE+1}
+    \strng{fullhash}{QEKDADJMRK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Adversarial Preprocessing: Understanding and
+  PreventingImage-Scaling Attacks in Machine Learning}
+    \verb{url}
+    \verb https://www.usenix.org/system/files/sec20fall_quiring_prepub.pdf
+    \endverb
+    \list{location}{1}{%
+      {Braunschweig, Germany}%
+    }
+    \list{institution}{1}{%
+      {Technische Universität Braunschweig}%
+    }
+    \field{year}{2020}
+    \field{urlday}{05}
+    \field{urlmonth}{07}
+    \field{urlyear}{2020}
+  \endentry
 \enddatalist
 \endinput

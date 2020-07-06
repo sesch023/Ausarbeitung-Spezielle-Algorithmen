@@ -24,7 +24,9 @@
 \usepackage{listings}
 \usepackage{amsmath}
 \usepackage{mathtools}
+\usepackage{colortbl}
 \usepackage{xpatch}
+\usepackage{hhline}
 \usepackage[xindy, nopostdot, nonumberlist]{glossaries}
 
 \newcommand{\listequationsname}{Formelverzeichnis}
@@ -46,6 +48,11 @@
 \definecolor{ipython_green}{RGB}{0, 128, 0}
 \definecolor{ipython_cyan}{RGB}{64, 128, 128}
 \definecolor{ipython_purple}{RGB}{170, 34, 255}
+
+\definecolor{green_tp}{RGB}{122, 255, 140}
+\definecolor{green_tn}{RGB}{214, 255, 220}
+\definecolor{red_fp}{RGB}{255, 176, 176}
+\definecolor{red_fn}{RGB}{255, 210, 171}
 
 \lstset{
 	breaklines=true,
@@ -342,8 +349,69 @@ Overfitting tritt auf, wenn ein Modell für die Trainingsdaten zu komplex gewäh
 \end{figure}
 Zuletzt sei das Underfitting genannt, welches dem Overfitting gegenübersteht. Ein Modell ist dabei zu einfach, um die Strukturen in den Trainingsdaten anzulernen. Modelle mit mehr Parametern, bessere Merkmale oder eine Verringerung der Regularisierung, reduzieren in der Regel ein Overfitting \cite[S.29]{MACHINE_LEARNING}\cite[S.14]{BA}.
 \subsubsection{Datenvorverarbeitung für Bilddaten}
-Wie im vorherigen Kapitel dargestellt, würden unzureichende Daten zu einer schlechteren Performanz beim Anlernen eines Modells führen. Dies kann auch bei Bilddaten der Fall sein und sollte durch Vorverarbeitungsschritte verhindert werden. In dieser Sektion sollen einige typische Schritte der Bildvorverarbeitung dargestellt werden.
+Wie im vorherigen Kapitel dargestellt, würden qualitativ unzureichende Daten zu einer schlechteren Performanz beim Anlernen eines Modells führen. Dies kann auch bei Bilddaten der Fall sein und sollte durch Vorverarbeitungsschritte verhindert werden. In dieser Sektion sollen einige typische Schritte der Bildvorverarbeitung dargestellt werden.
+\\\\
+Verrauschte Bilder können bei der Bilderkennung große Probleme darstellen. Ist ein Bild in keiner Weise rauschfrei, wurde gezeigt, dass Verfahren zum Entfernen von Rauschen eine positiven Effekt haben können \cite{RAUSCH}. Dieses Verfahren wurde im Praxisteil zwar, aufgrund des qualitativ hochwertigen Datensatzes, nicht genutzt, stellt aber für die Zukunft, besonders im Einsatz wo die Qualität der Bilddaten nicht immer gewährleistet ist, eine gute Methode zu einer möglichen Verbesserung dar.
+\\\\
+Ein weiterer Datenvorverarbeitungsschritt ist das Extrahieren von relevanten Bildausschnitten. Die meisten Datensätze für die Erkennung von Gebärdensprache, haben hier bereits die relevanten Ausschnitte vorverarbeitet, sodass nur noch die Hände zu sehen sind. Dies ist jedoch ein Problem für die Praxis, da ein Bild einer Webcam in der Regel mehr als nur die Hand beinhaltet. Es würde hier das Problem entstehen, dass die Daten in der Praxis nur wenig mit dem Angelernten übereinstimmen. Hier ist es sinnvoll den relevanten Teil eines Bildes zu extrahieren. Dazu wurde im Praxisteil ein Machine-Learning Framework names MediaPipe genutzt \cite{MEDIAPIPE}.
+\\\\
+Zuletzt müssen Bilder in der Regel vor der Nutzung skaliert werden. Ein Modell des Maschinellen Lernens erwartet in der Regel eine feste Eingabegröße. Dies gilt auch für Bilder, sodass als Beispiel das VGG19 Konvolutionelle Neuronale Netzwerk für Objekterkennung eine Eingabegröße von 224 x 224 Pixeln erwartet \cite[S.2]{SCALE}. Auch mit Blick auf die Laufzeit ergibt eine Skalierung von Bildern Sinn. Moderne Webcams erreichen schon häufig eine Auflösung von 1920 x 1080 Pixeln. Dies würde bei unskalierten und nicht extrahierten Bildinformationen zu einer Eingabegröße von 2. Millionen Parametern führen, was abhängig vom Modell zu sehr hohen Laufzeiten führen kann. Typische Algorithmen zum herunterskalieren von Bildern sind die Nächste-Nachbarn, Bilineare und Bikubische Interpolation \cite[S.2]{SCALE}.
 \subsubsection{Qualitätsmaße}
+Um die Leistung eines Modells korrekt bewerten zu können, müssen abhängig vom Ziel Qualitätsmaße eingeführt werden, die es möglich machen Modelle zu vergleichen. Dazu wird mit der Kreuzentropie ein typisches Qualitätsmaß für Klassifikationsprobleme eingeführt. Außerdem werden die Begriffe Konfusionsmatrix, Accuracy, Precision, Recall und F1-Score diskutiert.
+\\\\
+In praktisch allen Fällen können Algorithmen des Maschinellen Lernens nicht mit Klassenbezeichnungen in Form von Strings umgehen. Eine Menge von Klassenbezeichnungen wie \ensuremath{\{a, b, c \}} könnte nur schwierig direkt von Algorithmen als Label genutzt werden. Hier werden in der Regel zwei Möglichkeiten genutzt, um Bezeichnungen in nützlichere Label umzuwandeln. Diese wären:
+\begin{itemize}
+	\item Klassen-IDs: Die vorher angegebene Menge von Klassenbezeichnungen könnte in eine Menge von repräsentierenden IDs transformiert werden. So wird die Menge \ensuremath{\{a, b, c \}} in die IDs \ensuremath{\{0, 1, 2 \}} umgewandelt. Der Algorithmus muss bei der Klassifikation nun eine korrekte IDs vorhersagen, welche eine Klasse repräsentiert. Aufgrund der Arbeitsweise vieler Algorithmen nehmen diese allerdings an, dass IDs die näher beieinander liegen ähnlicher zueinander sind. Dies ist nicht für alle Problemstellungen ideal \cite[S.12]{BA}\cite[S.63]{MACHINE_LEARNING}.
+	\item One-Hot-Kodierung: Bei diesem Verfahren wird für jede Klasse eine Zahl in einem Vektor reserviert. Eine vorliegende Klasse wird dann in der Regel mit einer 1 und der Rest der Elemente mit einer 0 markiert. Für die Beispielmenge \ensuremath{\{a, b, c \}} ergebe sich daher die Menge von Vektoren \ensuremath{\{\left(\begin{smallmatrix}1 & 0 & 0\end{smallmatrix}\right), \left(\begin{smallmatrix}0 & 1 & 0\end{smallmatrix}\right), \left(\begin{smallmatrix}0 & 0 & 1\end{smallmatrix}\right)\}}. Korrekt klassifiziert wurde nun, wenn der vorliegende Klasse mit der höchsten Vorhersagen markiert wird. Da in diesem Fall keine Beziehung zwischen den Klassen erkannt wird, ist dieses Darstellung auch ideal für die Problemstellung \cite[S.12]{BA}\cite[S.63]{MACHINE_LEARNING}.
+\end{itemize}
+Die bereits vorher erwähnte Kreuzentropie ist ein ideales Qualitätsmaß für Klassifikationsprobleme in One-Hot-Kodierung. Niedrige Vorhersagen bei der vorliegenden Klassen werden dabei abgestraft, während andere Vorhersagen ignoriert werden. Für einen Datensatz mit \ensuremath{m} Tupeln, seinen One-Hot-kodierten Labels \ensuremath{\textbf{y}} mit \ensuremath{K}-Klassen und den One-Hot-kodierten Vorhersagen \ensuremath{\textbf{y'}} mit \ensuremath{K}-Klassen gilt \cite[S.13]{BA}\cite[S.63]{MACHINE_LEARNING}:
+\begin{equation}
+\label{eq:crossentropy}
+J = -\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}\textbf{y}_{ik} \cdot \log({\textbf{y}'_{ik}})
+\end{equation}\myequations{Kreuzentropie}
+\\
+Nun, wurde ein Qualitätsmaß eingeführt mit dem sich die Korrektheit einer Vorhersage bestimmen lassen kann. Im Folgenden werden nun Wege beschrieben, wie sich die Performanz eines Modells auf einem gesamten Datensatz auswerten lässt. Eine typische und ausführliche Auswertungsmöglichkeit bei Klassifikationsproblemen ist eine Konfusionsmatrize, für welche ein Beispiel in Abbildung \ref{fig:konfusion} zu sehen ist. Jede Zeile in einer Konfusionsmatrize steht für eine tatsächliche Klasse, während eine Spalte eine vorhergesagte Kategorie repräsentiert (dies ist definitionsabhängig und kann auch vertauscht werden). Die Wertepunkte in der Matrize beschreiben damit, als welche Klasse ein Datenpunkt einer tatsächlichen Klasse vorhergesagt wird. Sie werden meistens als feste Anzahl oder Anteile in Prozent aller Vorhersagen zu dieser Klasse angegeben. Die Hauptdiagonale der Matrize beschreibt alle korrekt klassifizierten Vorhersagen \cite[S.86-87]{MACHINE_LEARNING}.
+\begin{figure}[H]
+	\begin{center}
+		\begin{tabular}{|c||c|c|c|}
+			\hline
+			 & A & B & C\\
+			\hhline{|=||=|=|=|}
+			A & 90 & 4 & 6\\
+			\hline
+			B & 12 & 85 & 2\\
+			\hline	
+			C & 4 & 19 & 80\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption[Beispiel einer Konfusionsmatrize]{Beispiel einer Konfusionsmatrize für die Klassen A, B, C.}
+	\label{fig:konfusion}
+\end{figure}
+Eine Konfusionsmatrize ist sehr ausführlich und beinhaltet besonders bei vielen Klassen viele Informationen, die nicht unbedingt für die Lösung des betrachteten Problems relevant sind. In diesem Fall können andere Qualitätsmaße sinnvoll sein. Um diese zu Errechnen ist ein Verständnis über die Begriffe True Positive (TP), True Negative (TN), False Positive (FP) und False Negative (FN) nötig \cite[S.87]{MACHINE_LEARNING}. Diese sind beispielsweise abhängig zu Klasse A in der Abbildung \ref{fig:konfusion_tp} zu erkennen. Es gilt:
+\begin{itemize}
+	\item True Positive (grün): Beschreibt den korrekt klassifizierten Anteil der betrachteten Klasse.
+	\item True Negative (hellgrün): Beschreibt den korrekt klassifizierten Anteil der nicht betrachteten Klassen. 
+	\item False Positive (rot): Beschreibt den Anteil mit dem die nicht betrachteten Klassen fälschlicherweise als die Betrachtete eingeordnet werden.
+	\item False Negative (orange): Beschreibt den Anteil mit dem eine betrachtete Klasse fälschlicherweise als die nicht betrachteten Klassen eingeordnet wird.
+\end{itemize}
+\begin{figure}[H]
+	\begin{center}
+		\begin{tabular}{|c||c|c|c|}
+			\hline
+			& A & B & C\\
+			\hhline{|=||=|=|=|}
+			A & {\cellcolor{green_tp}} 90 & {\cellcolor{red_fn}} 4 & {\cellcolor{red_fn}} 6\\
+			\hline
+			B & {\cellcolor{red_fp}} 12 & {\cellcolor{green_tn}} 85 & 2\\
+			\hline	
+			C & {\cellcolor{red_fp}} 4 & 19 & {\cellcolor{green_tn}} 80\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption[Klassenweises Beispiel für TP, TN, FN, FP in einer Konfusionsmatrize]{Beispiel für TP, TN, FN, FP der Klasse A in einer Konfusionsmatrize.}
+	\label{fig:konfusion_tp}
+\end{figure}
 \subsubsection{Testen und Validieren}
 \subsection{Neuronale Netze}
 \subsection{Konvolutionelle Neuronale Netze}
@@ -363,5 +431,6 @@ Wie im vorherigen Kapitel dargestellt, würden unzureichende Daten zu einer schl
 \section{Ausblick}
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
+\pagebreak
 \printbibliography[title=Quellen]
 \end{document}
