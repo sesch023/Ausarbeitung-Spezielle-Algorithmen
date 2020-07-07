@@ -412,7 +412,49 @@ Eine Konfusionsmatrize ist sehr ausführlich und beinhaltet besonders bei vielen
 	\caption[Klassenweises Beispiel für TP, TN, FN, FP in einer Konfusionsmatrize]{Beispiel für TP, TN, FN, FP der Klasse A in einer Konfusionsmatrize.}
 	\label{fig:konfusion_tp}
 \end{figure}
+Nun, können auf Basis der eingeführten Begriffe einige Qualitätsmaße eingeführt und ihr Einsatz abhängig vom Datensatz diskutiert werden. Die Vorhersagegenauigkeit A stellt alle korrekt klassifizierten Datenpunkte (TP, TN), der Menge aller klassifizierten Datenpunkte (M) gegenüber \eqref{eq:vorhersageg}. Die Vorhersagegenauigkeit ist ein beliebtes Qualitätsmaß, welches jedoch einige Probleme aufweist. Ist ein Datensatz unbalanchiert, also ist eine Klasse deutlich mehr vertreten als eine andere, so wird diese Klasse die Vorhersagegenauigkeit stärker beeinflussen als andere. Dies kann zu einem Klassifikator führen, der lediglich die am stärksten vertretene Klasse antizipiert \cite[S.85-86]{MACHINE_LEARNING}.
+\begin{equation}
+\label{eq:vorhersageg}
+\begin{aligned}
+&A = \frac{TP + TN}{M}
+\end{aligned}
+\end{equation}\myequations{Vorhersagegenauigkeit} \\
+Der Recall \eqref{eq:recall} ist ein Maß, welches die korrekt klassifizierten Datenpunkte allen Datenpunkte mit dieser Klasse gegenüberstellt. Er ist damit sehr gut für unterrepräsentierte Klasse geeignet, da ein Fokus auf die korrekte Klassifikation dieser gesetzt wird \cite[S.87]{MACHINE_LEARNING}. Ein möglicher Anwendungsfall wäre damit die korrekte Klassifikation von Krankheitsfällen, da diese in der Regel unterrepräsentiert sind.
+\begin{equation}
+\label{eq:recall}
+\begin{aligned}
+&R = \frac{TP}{TP + FN}
+\end{aligned}
+\end{equation}\myequations{Recall} \\
+Weiterhin gibt es mit der Precision \eqref{eq:precision} ein Qualitätsmaß, welches dem Recall mit einer Wechselbeziehung gegenübersteht. Statt die False Negatives zu betrachten, betrachtet es mit den False Positives die Datenpunkte, die fälschlicherweise als die betrachtete Klasse klassifiziert wurden. Die Precision steigt also, wenn weniger Datenpunkte falsch als die betrachtete Klasse dargestellt werden \cite[S.87]{MACHINE_LEARNING}. Ein typischer Anwendungsfall hierfür ist ein Spamfilter, da möglichst wenig Nachrichten fälschlicherweise als Spam markiert werden sollten.
+\begin{equation}
+\label{eq:precision}
+\begin{aligned}
+&P = \frac{TP}{TP + FP}
+\end{aligned}
+\end{equation}\myequations{Precision} \\
+Zuletzt sei mit dem F1-Score \eqref{eq:fone} ein beliebtes Qualitätsmaß genannt, welches Recall und Precision in ihrem harmonischen Mittelwert vereint. Es wird genutzt, wenn sowohl Recall als auch Precision relevante Tatsachen darstellen.
+\begin{equation}
+\label{eq:fone}
+\begin{aligned}
+&F1 = 2\cdot \frac{P \cdot R}{P + R}
+\end{aligned}
+\end{equation}\myequations{F1-Score} \\ 
+Da nun alle typischen Qualitätsmaße eingeführt wurden, können im nächsten Kapitel typische Richtlinien zum Vergleichen der Performanz von Modellen beschrieben werden.
 \subsubsection{Testen und Validieren}
+Eine gute Performanz während des Trainings eines Modells bedeutet noch keine gute tatsächliche Leistung. Overfitting oder andere Effekte können eine Qualität vortäuschen, welche im echten Einsatz aufgrund einer Spezialisierung des Modells auf die Trainingsdaten nicht erreicht wird. Es haben sich hier zwei typischen Verfahren etabliert, um damit umzugehen. 
+\\\\
+Zum einen kann ein Trainingsdatensatz in drei Teile, einem tatsächlichen Trainingsdatensatz, einen Validierungsdatensatz und einen Testdatensatz unterteilt werden. Eine typische Unterteilung hierfür ist 80\% für das Training und jeweils 10\% für Validierung und Test zu reservieren. Das Modell wird dann wie bisher mit dem Trainingsdatensatz angelernt und im folgenden mit dem Valdierungsdatensatz geprüft. Dann wird das Modell optimiert und der Vorgang wiederholt bis eine gewünschte Qualität erreicht wurde. Ist dies  abgeschlossen, ist eine letzte Überprüfung nötig. Da während des Optimierungsvorgangs eine Spezialisierung auf Trainings- und Validierungsdaten stattgefunden haben könnte, muss mit dem bisher unbekannten Testdatensatz eine erreichte Verallgemeinerung des Wissens im Modell überprüft werden. Wurde keine ausreichende Performanz festgestellt, muss der gesamte Trainingsvorgang wiederholt werden bis ein Modell die gewünschte Qualität erreicht \cite[S.30-31]{MACHINE_LEARNING}\cite[S.43-44]{BA}.
+\\\\
+Eine weitere beliebte Möglichkeit zur Validierung von Modellen ist die Kreuzvalidierung. Ein Datensatz wird dabei in k-Teile (beispielsweise k = 10) unterteilt. Einer dieser Teil wird als Testdatensatz ausgewählt, während alle anderen Teile zum Training kombiniert werden. Dann wird das Training ausgeführt und die Leistung des Modells vermerkt. Nun wird dies für einen anderen der k-Teile als Testdatensatz und dem nicht trainierten Modell wiederholt, bis jeder Teil einmal getestet wurde. Aus den k-Leistungsdaten wird dann eine Gesamtleistung errechnet, welche eine gute Repräsentation für die Leistung des Modells ist. Zum genaueren Testen nach der Kreuzvalidierung ist auch eine vorherige Abspaltung weiterer Testdaten denkbar \cite[S.22]{DEEP_LEARNING}\cite[S.44]{BA}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{kreuzvalidierung}
+	\vspace*{-3mm}
+	\caption[Beispiel für Kreuzvalidierung]{Beispiel für eine 5-fache Kreuzvalidierung \cite[S.44]{BA}.}
+	\label{fig:crossvalidation}
+\end{figure}
+\vspace*{-5mm}
 \subsection{Neuronale Netze}
 \subsection{Konvolutionelle Neuronale Netze}
 \section{Datensätze}
