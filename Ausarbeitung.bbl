@@ -211,5 +211,90 @@
     \field{urlmonth}{07}
     \field{urlyear}{2020}
   \endentry
+
+  \entry{NNP}{book}{}
+    \name{author}{2}{}{%
+      {{hash=SR}{%
+         family={Schwaiger},
+         familyi={S\bibinitperiod},
+         given={Roland},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Steinwendner},
+         familyi={S\bibinitperiod},
+         given={Joachim},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Rheinwerk}%
+    }
+    \strng{namehash}{SRSJ1}
+    \strng{fullhash}{SRSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-3-8362-6142-5}
+    \field{title}{Neuronale Netze programmieren mit Python}
+    \list{location}{1}{%
+      {Bonn}%
+    }
+    \field{year}{2019}
+  \endentry
+
+  \entry{NN}{book}{}
+    \name{author}{2}{}{%
+      {{hash=RGD}{%
+         family={Rey},
+         familyi={R\bibinitperiod},
+         given={Günter\bibnamedelima Daniel},
+         giveni={G\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=WKF}{%
+         family={Wender},
+         familyi={W\bibinitperiod},
+         given={Karl\bibnamedelima F.},
+         giveni={K\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Huber}%
+    }
+    \strng{namehash}{RGDWKF1}
+    \strng{fullhash}{RGDWKF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-3-456-84881-5}
+    \field{title}{Neuronale Netze: Eine Einführung in die Grundlagen,
+  Anwendungen und Datenauswertung}
+    \list{location}{1}{%
+      {Bern}%
+    }
+    \field{year}{2011}
+  \endentry
+
+  \entry{GRADIENT_IMAGE}{online}{}
+    \name{author}{1}{}{%
+      {{hash=PDRGD}{%
+         family={Prof. Dr.\bibnamedelima Rey},
+         familyi={P\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim
+  R\bibinitperiod},
+         given={Günter\bibnamedelima Daniel},
+         giveni={G\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PDRGD1}
+    \strng{fullhash}{PDRGD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Künstliche neuronale Netze}
+    \verb{url}
+    \verb https://www.tu-chemnitz.de/phil/imf/psyler/lehre/WS18-19/S_KnN/3%20Le
+    \verb rnregeln.pdf
+    \endverb
+    \field{urlday}{07}
+    \field{urlmonth}{10}
+    \field{urlyear}{2019}
+  \endentry
 \enddatalist
 \endinput

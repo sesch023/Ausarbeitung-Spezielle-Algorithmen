@@ -456,6 +456,155 @@ Eine weitere beliebte Möglichkeit zur Validierung von Modellen ist die Kreuzval
 \end{figure}
 \vspace*{-5mm}
 \subsection{Neuronale Netze}
+In dieser Arbeit wurde sich wie heutzutage typisch bei der Bilderkennung auf Neuronale Netze und besonders die Konvolutionellen Neuronale Netze fokussiert. Diese sind bei der Bilderkennung in vielen Bereichen State of the Art und werden von vielen bekannten vortrainierten Modellen wie dem VGG19 genutzt. Um diese zu verstehen, sollen allerdings erst die einfachen Neuronalen Netze beschrieben werden.
+\subsubsection{Biologische Grundlagen}
+Neuronen sind für viele Menschen vor allem aus ihren eigenen Gehirn bekannt. In diesem arbeiten viele der kleinen Nervenzellen zusammen, um Informationen zu verarbeiten. Jedes Neuron nimmt elektrische Signale über seine stark verzweigten Dendriten auf und sammelt sie in seinem Zellkörper, dem Soma an. Ist eine gewissen stärke des elektrischen Signals vorhanden, so gibt ein Neuron dieses über sein Axon weiter. Axone sind lange, verzweigte Fäden, die mittels Synapsen mit den Dendriten anderer Neuronen verbunden sind. Synapsen arbeiten mit chemischen Transmittern und können eine erregende oder hemmende Wirkung auf das zu übertragene Signal haben. Biologische Neuronale Netze lernen nun, indem die Stärke der Verbindung über die Synapsen gesteuert wird. Außerdem können Verbindungen getrennt und neu eingegangen werden, was ebenfalls einen Lerneffekt erzeugt \cite[S.24]{BA}\cite[S.43-45]{DEEP_LEARNING}\cite[S.29-30]{NNP}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{neuron_biologisch}
+	\vspace*{-5mm}
+	\caption[Aufbau eines biologischen Neurons]{Aufbau eines biologischen Neurons \cite[S.255]{MACHINE_LEARNING}.}
+	\label{fig:aufbau_bio_neuron}
+\end{figure}
+\vspace*{-5mm}
+\subsubsection{Künstliche Neuronen}
+In künstlichen Neuronalen Netzen wird nun eine auf den Biologischen Grundlagen basierende künstliche Variante von Neuronen genutzt. Diese nehmen über ihre Eingänge, ähnlich zu den verbundenen Axonen, Signale auf, welche im Folgenden als ein Vektor \textbf{x} mit n-Elementen dargestellt wird. Jede dieser Eingangssignale wird nun über einen eigenen Wert in einem Gewichtungsvektor \textbf{w} gehemmt oder verstärkt, was ähnlich zu der Arbeitsweise von Synapsen ist. Nun, werden ebenfalls ähnlich zum biologischen Vorbild, alle eingegangen Signale aufaddiert, jedoch an eine Aktivierungsfunktion \ensuremath{f_{akt}} weitergegeben, welche ein Signal nochmal auf eine bestimmte Weise verarbeitet und sich komplett anders zum biologischen Vorbild verhalten kann. Zum Schluss kann das errechnete Signal des Künstlichen Neurons an weitere Neuronen geleitet werden, ähnlich zum ausgehenden Axon der biologischen Variante \cite[S.25]{BA}\cite[S.30-31]{NNP}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{neuron_adv}
+	\vspace*{-5mm}
+	\caption[Aufbau eines künstlichen Neurons]{Aufbau eines künstlichen Neurons, angelehnt an das biologische Vorbild \cite[S.25]{BA}.}
+	\label{fig:aufbau_kuenstliches_neuron}
+\end{figure}
+\vspace*{-5mm}
+Für n-Eingänge lässt sich ein Künstliches Neuron nun folgendermaßen definieren \cite[S.25]{BA}\cite[S.30]{NNP}:
+\begin{equation}
+\label{eq:perceptron_def}
+\begin{aligned}
+y = f_{akt}\left(\sum_{i=1}^{n}x_iw_i\right) = f_{akt}(\textbf{x}^T \cdot \textbf{w})
+\end{aligned}
+\end{equation}\myequations{Mathematische Definition eines Künstlichen Neurons}\\
+Wird eine Schwellenwertfunktion \eqref{eq:heavyside} als Aktivierungsfunktion genutzt, so wird ein Künstliches Neuron in der Regel als Perzeptron bezeichnet \cite[S.26]{BA}\cite[S.49]{DEEP_LEARNING}. 
+\begin{equation}
+\label{eq:heavyside}
+\begin{aligned}
+f_{akt} =
+\begin{cases}
+0 & x < 0\\
+1 & x \geq 0
+\end{cases}
+\end{aligned}
+\end{equation}\myequations{Schwellenwertfunktion eines Perzeptrons}
+\subsubsection{Einschichtige Neuronale Netze}
+Liegen mehrere Künstliche Neuronen oder Perzeptrons in einer einzigen Schicht vor, entsteht ein erstes einschichtiges Neuronales Netz. Dabei wird jeder Eingang in das Neuronale Netz mit jedem Neuron in der einen Schicht des Netz verbunden und über Gewichtungen verändert. Die Eingänge werden dabei häufig in der Notation als Schicht von Eingabeneuronen dargestellt, welche lediglich die Eingabewerte an die Künstlichen Neuronen weitertragen. Weiterhin wird in die Eingabeschicht dieser Netze häufig ein spezielles Neuron eingeführt, welches lediglich eine Eins als Ausgabe liefert und über Gewichtungen verändert werden kann. Dies wird als Bias-Neuron bezeichnet. Die Ausgänge der Künstlichen Neuronen des Netzes, können nun als Ausgabevektor \textbf{y} ausgelesen werden \cite[S.26]{BA}\cite[S.258]{MACHINE_LEARNING}. Ein einschichtiges Neuronale Netz mit einer vereinfachten Darstellung der Neuronen ist in der Abbildung \ref{fig:multi_neuron_perceptron} dargestellt.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{multi_neuron_perceptron}
+	\vspace*{-5mm}
+	\caption[Einschichtiges Neuronales Netz]{Aufbau eines einschichtigen Neuronalen Netzes \cite[S.27]{BA}\cite[S.258]{MACHINE_LEARNING}.}
+	\label{fig:multi_neuron_perceptron}
+\end{figure}
+\vspace*{-5mm}
+Die Gewichtungen zwischen der Eingabeschicht und der Ausgabeschicht werden zur einfachen Berechnung typischerweise als Matrix \textbf{W} dargestellt \eqref{eq:perzeptron_matrix} \cite[S.26]{BA}\cite[S.258]{MACHINE_LEARNING}.
+\begin{equation}
+\label{eq:perzeptron_matrix}
+\begin{aligned}
+\textbf{W} = 
+\begin{pmatrix}
+w_{11} & w_{12} & w_{13} \\
+w_{21} & w_{22} & w_{23} \\
+w_{b1} & w_{b2} & w_{b3} \\\end{pmatrix}
+\end{aligned}
+\end{equation}\myequations{Matrizendarstellung eines einschichtigen Neuronalen Netzes}\\ 
+Mittels dieser Darstellung kann bei einer elementweisen Auswertung der Aktivierungsfunktion und einer Matrizenmultiplikation sehr einfach eine ähnliche Formel wie \eqref{eq:perceptron_def} angewandt werden, um die Ausgabe des Netzes zu errechnen:
+\begin{equation}
+\label{eq:slp_def}
+\begin{aligned}
+\textbf{y} = f_{akt}(\textbf{x}^T \cdot \textbf{W})
+\end{aligned}
+\end{equation}\myequations{Mathematische Definition eines einschichtigen Neuronalen Netzes}\\
+Doch wie lernen einschichtige Neuronale Netze sich an neue Informationen anzupassen. Früher und für nicht überwachtes Lernen, wurde hier häufig die an die menschliche Biologie angelehnte Hebbsche Lernregel angewandt. Diese ist jedoch für überwachtes Lernen wie im Fall der Problemstellung eher ungeeignet. Es wird also das in der Praxis häufig eingesetzte Gradientenabstiegsverfahren betrachtet \cite[S.259]{MACHINE_LEARNING}. 
+\subsubsection{Gradientenabstiegsverfahren} 
+Die Idee hinter dem Gradientenabstiegsverfahren ist eine schrittweise Verringerung des Gesamtfehler eines einschichtigen Neuronalen Netzes \ensuremath{F} unter einer Fehlerfunktion \ensuremath{E(\textbf{y'}, \textbf{y})} für die Vorhersagen \ensuremath{\textbf{y'}} und die Labels \ensuremath{\textbf{y}}, indem eine optimale Kombination von Gewichten \ensuremath{\textbf{W}_{min}} gesucht wird \eqref{eq:gradient} \cite[S.28]{BA}.
+\begin{equation}
+\label{eq:gradient}
+\begin{aligned}
+\underset{\textbf{W}}{\text{min}} \medspace & & & F = E(f_{akt}(\textbf{x}^T \cdot \textbf{W}) ,y)
+\end{aligned}
+\end{equation}\myequations{Ziel des Gradientenabstiegsverfahren}\\
+In einer dreidimensionalen Gebirgslandschaft, welche durch zwei Gewichte und dem Fehler beschrieben ist, kann man sich die Arbeitsweise dieses Algorithmus leicht vorstellen. Ein Bergsteiger mit eingeschränkter Sicht in dieser Landschaft, kann sich lediglich über den Punkt des steilsten Abstiegs langsam und schrittweise in ein Tal wagen. Er versucht also immer weiter dem steilsten Abstieg zu folgen, bis er ein Tal der Fehlerfunktion findet. Dies lässt sich in \ref{fig:gradient} erkennen \cite[S.28]{BA}\cite[S.39]{NN}. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{gradient}
+	\vspace*{-5mm}
+	\caption[Fehler im Neuronalen Netz]{Gebirgslandschaft des Fehlers in einem Neuronalen Netz \cite{GRADIENT_IMAGE}.}
+	\label{fig:gradient}
+\end{figure}
+Im Algorithmus funktioniert dies durch partielle Ableitungen der Fehlerfunktion nach jedem Gewicht und einem Anwenden des daraus resultierenden Gradientenvektors in negativer Richtung angepasst durch die gewählte Lernrate, welche die Geschwindigkeit des Abstiegs zum Minimum definiert. Dies wird wiederholt bis ein gewünschtes Minimum oder eine gewählte Zahl an Wiederholungen erreicht wurde. Die Wiederholungen werden bei Neuronalen Netzen über alle Trainingsdaten auch als Epochen bezeichnet \cite[S.29-30]{BA}\cite[S.41]{NN}\cite[S.31]{DEEP_LEARNING}. Häufig wird jede Epoche aber auch noch in kleinere Teile, den sogenannten Batches unterteilt.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{2DGradient}
+	\vspace*{-5mm}
+	\caption[Gradientenabstiegsverfahren in zwei Dimensionen]{Das Gradientenabstiegsverfahren in zwei Dimensionen \cite[S.113]{MACHINE_LEARNING}.}
+	\label{fig:2DGrad}
+\end{figure}
+\vspace*{-5mm}
+Bereits durch die Beschreibung des Algorithmus lassen sich einige Probleme abschätzen. Zum einen ist nicht gewährleistet, dass ein globales Minimum gefunden wird. Stoppt der Algorithmus in einem lokalen Minimum, so kann nicht weiter optimiert werden. Eine höhere Lernrate oder ein Momentum-Term, welcher dem Algorithmus beim Wander durch die mehrdimensionale Gebirgslandschaft eine gewisse Trägheit gibt, können dafür sorgen, dass lokale Minima übersprungen werden. Eine hohe Lernrate kann aber auch zu Problemen führen. So ist in diesem Fall eine ein- oder mehrschrittige Oszillation zwischen den Talrändern ein typisches Problem, welches auftreten kann. Auch kann sie ganz zum Überspringen des globalen Minimum führen \cite[S.30]{BA}\cite[S.46-47]{NN}.
+\\\\
+Ein weiteres Problem tritt bezüglich der bisher bekannten Aktivierungsfunktion, der Schwellenwertfunktion, auf. Für diese kann kein Gradient ungleich null berechnet werden, wodurch kein Minimum gefunden werden kann. Dies kann durch das Einführen anderer Aktivierungsfunktionen gelöst werden und wird in einem späteren Kapitel betrachtet \cite[S.31-32]{BA}\cite[S.262]{MACHINE_LEARNING}.
+\subsubsection{Mehrschichtige Neuronale Netze}
+Leider lassen sich mit einschichtigen Neuronalen Netzen nur einfache Probleme lösen. Dies lässt sich durch das Einfügen weiterer Schichten lösen, indem die Ausgaben der vorherigen Schicht durch weitere erlernbare Gewichtungen an die nächste Schicht weitergegeben werden. Alle Schichten zwischen der Eingabe- und Ausgabeschicht werden dabei als verborgene Schichten oder Hidden-Layer bezeichnet \cite[S.31-32]{BA}\cite[S.261]{MACHINE_LEARNING}. Ein Beispiel hierfür ist in der folgenden Abbildung zu erkennen: 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{multi_layer_perceptron}
+	\vspace*{-3mm}
+	\caption[Mehrschichtiges Neuronales Netz]{Ein mehrschichtiges Neuronales Netz mit zwei verborgenen Schichten \cite[S.32]{BA}\cite[S.261]{MACHINE_LEARNING}.}
+	\label{fig:mutlilayer_nn}
+\end{figure}
+\vspace*{-5mm}
+Leider funktioniert das Gradientenabstiegsverfahren in der bisherigen Funktionsweise nur mit einem einzigen Layer, da der Fehler von verborgenen Schichten nicht direkt errechnet werden kann. Es fehlt damit eine Lernmethode für das überwachte Lernen. Die Lösung hierfür ist das Backpropagation-Verfahren \cite[S.261]{MACHINE_LEARNING}. 
+\subsubsection{Backpropagation-Verfahren}
+Über das Backpropagation-Verfahren wird der Fehler eines mehrschichtigen Neuronalen Netzes über seine Schichten zurückgerechnet, um eine Veränderungen der Gewichtungen in den verborgenen Schichten zu ermöglichen \cite[S.51-52]{NN}.
+% Hier weiter
+Typischerweise können bei dem Backpropagation-Verfahren ähnliche Probleme wie beim Gradientenabstiegsverfahren auftreten. Außerdem können Gradienten aufgrund des Zurückrechnens sehr klein ausfallen und zu einer immer kleiner werdenden Anpassung der Gewichte in den ersten Schichten führen. Dies würde zu einem immer kleiner werdenden Lerneffekt führen. In wenigen Fällen kann auch ein gegenteiliges Problem, die explodierenden Gradienten auftreten \cite[S.33-34]{BA}\cite[S.275-276]{MACHINE_LEARNING}. In der Regel lässt sich dies über sinnvollere Aktivierungsfunktionen und spezielle Regularisierungsverfahren lösen, die in den nächsten Kapiteln betrachtet werden.
+\subsubsection{Aktivierungsfunktionen}
+Moderne Neuronale Netze verwenden in der Regel Aktivierungsfunktionen, welche auf der ReLU (Rectified Linear Units) basieren. Die ReLU hat im Gegensatz zu anderen, typischerweise früher eingesetzten Aktivierungsfunktionen wie der Sigmoidfunktion oder dem Tangens hyperbolicus, den Vorteil, dass sie keinen Sättigungseffekt, daher eine sehr kleine Ableitung, für positive Werte erfährt. Dies wirkt dem Problem der schwindenden Gradienten entgegen \cite[S.34-35]{BA}. Für die Eingabe x ist die ReLU definiert als \cite[S.245, S.279]{MACHINE_LEARNING}:
+\begin{equation}
+\label{eq:relu}
+\begin{aligned}
+f_{akt} =
+\begin{cases}
+x & x \geq 0\\
+0 & x < 0
+\end{cases}
+\end{aligned}
+\end{equation}\myequations{ReLU}\\
+Wie zu sehen ist die ReLU für positive Werte lediglich äquivalent zu der originalen Eingabe. Damit ist sie sehr einfach zu berechnen. Leider leidet sie unter einem großen Problem. Ein Neuron mit einer negative Eingabesumme vor der Aktivierungsfunktionen liefert eine Konstante 0 und trägt mich mehr zum Lernen bei. Tritt dies bei vielen Neuronen auf, kann dies ebenfalls den Lerneffekt beschränken \cite[S.279]{MACHINE_LEARNING}.
+\\\\
+In vielen Fällen wird dies über die Verwendung leicht abgewandelter ReLU-Varianten wie der Leaky-ReLU oder der ELU (Exponential Linear Unit), die auch in diesem Projekt verwendet wurde, gelöst. Die ELU hat im Positiven ein lineares Verhalten, während sie sich im Negativen wie eine negative Exponentialfunktion verhält die sich einem Parameter a annähert. Es gilt \cite[S.36]{BA}:
+\begin{equation}
+\label{eq:elu}
+\begin{aligned}
+f_{akt} =
+\begin{cases}
+x & x \geq 0\\
+a(e^x - 1) & x < 0
+\end{cases}
+\end{aligned}
+\end{equation}\myequations{ELU}\\
+Mit diesen Aktivierungsfunktionen können bereits einige typische Probleme beim Maschinellen Lernen mit mehrschichtigen Neuronalen Netzen und Backpropagation verhindert werden. Eine weitere verwendete Aktivierungsfunktion, welche vorallem bei der Ausgabeschicht von Klassifikationsproblemen mit One-Hot kodierten Labeln nützlich ist, ist die Softmax-Funktion. Im Gegensatz zu anderen Aktivierungsfunktionen erhält sie die Ausgabe aller Neuronen einer Schicht. Diese Ausgaben werden dann mit der Summe aller Ausgaben normalisiert, was in einen Vektor von Zahlen zwischen 0 und 1 resultiert. Diese werden in der Regel als Wahrscheinlichkeiten für eine vorliegende Klasse interpretiert. Für den Vektor mit Neuronensummen \ensuremath{\textbf{s}} mit n-Elementen ist die Softmax definiert als \cite[S.37]{BA}\cite[S.141-142, S.263]{MACHINE_LEARNING}: 
+\begin{equation}
+\label{eq:softmax}
+\begin{aligned}
+f_{akt} = \frac{e^{s_i}}{\sum_{i=1}^{n}e^{s_i}}
+\end{aligned}
+\end{equation}\myequations{Softmax}
+\subsubsection{Regularisierungsverfahren}
+Zuletzt werden nun zwei typische Regularisierungsverfahren für Neuronale Netze betrachtet, mit denen die Performanz dieser auf bestimmte Weisen erhöht werden kann.
+\\\\
+Die Batch-Normalisierung ist ein ideales Verfahren, um schwindenden Gradienten sowie Overfitting entgegen zu wirken und die Stabilität von Neuronalen Netzen zu erhöhen. Diese wird schicht- und batchweise ausgeführt, indem die Summe aller Neuronen einer Schicht vor der Aktivierungsfunktion standardisiert wird. Das Verfahren arbeitet, indem der Mittelwert auf 0 zentriert und durch die Standardabweichung der Batch geteilt wird. Dann wird das Ergebnis über zwei lernbare Parameter skaliert und verschoben. Dadurch kann das Netz die ideale Skalierung und den Mittelwert der Eingaben für eine Schicht erlernen. Schwindenden Gradienten werden dadurch so stark bekämpft, dass sogar der Einsatz der Sigmoidfunktion oder des Tangens hyperbolicus wieder denkbar wäre \cite[S.37-38]{BA}\cite[S.282-283]{MACHINE_LEARNING}.
+\\\\
+
 \subsection{Konvolutionelle Neuronale Netze}
 \section{Datensätze}
 \subsection{Sign Language MNIST Dataset}

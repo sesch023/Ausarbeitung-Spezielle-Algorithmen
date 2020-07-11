@@ -8,3 +8,19 @@
 \contentsline {myequations}{\numberline {4}Precision}{9}{equation.3.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {myequations}{\numberline {5}F1-Score}{10}{equation.3.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {6}Mathematische Definition eines Künstlichen Neurons}{13}{equation.3.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {7}Schwellenwertfunktion eines Perzeptrons}{13}{equation.3.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {8}Matrizendarstellung eines einschichtigen Neuronalen Netzes}{14}{equation.3.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {9}Mathematische Definition eines einschichtigen Neuronalen Netzes}{14}{equation.3.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {10}Ziel des Gradientenabstiegsverfahren}{15}{equation.3.10}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {11}ReLU}{19}{equation.3.11}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {12}ELU}{20}{equation.3.12}
+\defcounter {refsection}{0}\relax 
+\contentsline {myequations}{\numberline {13}Softmax}{20}{equation.3.13}
