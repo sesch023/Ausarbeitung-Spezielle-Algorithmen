@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.9.30)  12 JUL 2020 17:57
+This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.9.30)  12 JUL 2020 17:59
  restricted system commands enabled.
 **Ausarbeitung.tex
 (./Ausarbeitung.tex
@@ -2113,11 +2113,7 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count468
 \@quotereset=\count469
-(./Ausarbeitung.aux
-
-LaTeX Warning: Label `fig:cnn_3d' multiply defined.
-
-)
+(./Ausarbeitung.aux)
 \openout1 = Ausarbeitung.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 266.
@@ -2138,7 +2134,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 266.
 LaTeX Font Info:    ... okay on input line 266.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 266.
 LaTeX Font Info:    ... okay on input line 266.
- (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count470
 \scratchdimen=\dimen309
@@ -3195,10 +3192,6 @@ File: pooling.png Graphic file (type png)
 Package luatex.def Info: pooling.png  used on input line 663.
 (luatex.def)             Requested size: 355.5182pt x 172.39769pt.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 669.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 669.
-Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 670.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 670.
@@ -3250,17 +3243,21 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 682.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 682.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 683.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 683.
 
 Overfull \vbox (1.10608pt too high) has occurred while \output is active []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 
 [25
 warning  (pdf backend): ignoring duplicate destination with the name 'figure.16'
@@ -3269,34 +3266,34 @@ warning  (pdf backend): ignoring duplicate destination with the name 'figure.16'
 Overfull \vbox (1.10608pt too high) has occurred while \output is active []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 
 [26]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 686.
+(babel)             in language  on input line 687.
 
-Overfull \hbox (14.36804pt too wide) in paragraph at lines 686--686
+Overfull \hbox (14.36804pt too wide) in paragraph at lines 687--687
 \TU/Caladea(0)/m/sc/12 sa-ge von Per-sön-lich-keits-pro-fi-len mit-tels Künst
 -li-cher In-tel-li-genz''. Iser-lohn: Fach-
  []
 
 (load luc: /home/sebastian/.texlive2017/texmf-var/luatex-cache/generic/fonts/otl
 /lmmono12-regular.luc)
-Overfull \hbox (1.89084pt too wide) in paragraph at lines 686--686
+Overfull \hbox (1.89084pt too wide) in paragraph at lines 687--687
 \TU/Caladea(0)/m/sc/12 ver-s-a-ri-al Prepro-ces-sing: Un-der-stan-ding and Prev
 entingImage-Scaling At-tacks
  []
 
 
-Overfull \hbox (4.06271pt too wide) in paragraph at lines 686--686
+Overfull \hbox (4.06271pt too wide) in paragraph at lines 687--687
 \TU/Caladea(0)/m/sc/12 in Ma-chi-ne Learning''. Braun-schweig, Ger-ma-ny: Tech-
 ni-sche Uni-ver-si-tät Braun-
  []
@@ -3305,28 +3302,25 @@ ni-sche Uni-ver-si-tät Braun-
 Overfull \vbox (1.10608pt too high) has occurred while \output is active []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 687.
+(babel)             in language  on input line 688.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 687.
+(babel)             in language  on input line 688.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 687.
+(babel)             in language  on input line 688.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 687.
+(babel)             in language  on input line 688.
 
 [27]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 687.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 687.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 688.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 688.
  (./Ausarbeitung.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 687.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 687.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 688.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 688.
 Package rerunfilecheck Info: File `Ausarbeitung.out' has not changed.
 (rerunfilecheck)             Checksum: 2B5B422DAE5C6650E5B7A6D4EDD26472;6313.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were multiply-defined labels.
 
 Package logreq Info: Writing requests to 'Ausarbeitung.run.xml'.
 
@@ -3356,7 +3350,7 @@ i6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Ausarbeitung.pdf (32 pages, 6045846 bytes).
+Output written on Ausarbeitung.pdf (32 pages, 6046033 bytes).
 
 PDF statistics: 683 PDF objects out of 1000 (max. 8388607)
  572 compressed objects within 6 object streams
