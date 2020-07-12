@@ -608,6 +608,44 @@ Die Batch-Normalisierung ist ein ideales Verfahren, um schwindenden Gradienten s
 \\\\
 Eine weitere Möglichkeit zur Regularisierung ist ein Dropout in verborgenen Schichten. Das Prinzip vom Dropout ist, dass Neuronen in einer Schicht während eines Schritts des Trainingsvorgangs mit einer gewissen Wahrscheinlichkeit ausgelassen werden. Wird der nächste Schritt erreicht, so werden die Dropouts neu ausgewürfelt. Durch das Auslassen von gewissen Neuronen, werden andere dazu gezwungen ihr Wissen zu verallgemeinern, da sie sich nicht auf die ausgeschiedenen Neuronen verlassen können. Dies wirkt Overfitting entgegen \cite[S.38-39]{BA}\cite[S.205-206]{NNP}.
 \subsection{Konvolutionelle Neuronale Netze}
+Heutzutage werden für Aufgaben der Bilderkennung in der Regel keine einfachen Neuronalen Netze, sondern Konvolutionelle Neuronale Netze eingesetzt. Diese wurden zum ersten mal 1980 eingesetzt und sind am Aufbau des visuellen Cortex des Menschen angelehnt. In diesem Arbeiten Neuronen in verschiedenen Schichten von Filtern, die aufeinander aufbauen. Die oberen Filter erkennen viele einfache Bildelemente, wie unterschiedliche Ausrichtungen von Linien. Diese werden weiter an untere Schichten geleitet, die das gefilterte immer weiter zu komplexen Mustern und Bildern kombinieren können \cite[S.360]{MACHINE_LEARNING}. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{visueller_cortex}
+	\vspace*{-3mm}
+	\caption[Aufbau des visuellen Cortex]{Aufbau des visuellen Cortex eines Menschen \cite[S.360]{MACHINE_LEARNING}.}
+	\label{fig:visueller_cortex}
+\end{figure}
+\vspace*{-5mm}
+Diese Erkenntnisse wurden dann genutzt, um 1980 die ersten Konvolutionelle Neuronale Netze zu entwickeln und für die Erkennung von handgeschriebenen Ziffern zu nutzen. Ein typischer Aufbau für Konvolutionelle Neuronale Netze besteht aus drei verschiedenen Schichten. Die letzten Schichten sind dabei in der Regel die bereits betrachteten vollständig verbundenen Neuronale Netz Schichten. Am Anfang befinden sich allerdings im Wechsel Convolutional und Pooling Layer, welche im folgenden betrachtet werden \cite[S.361]{MACHINE_LEARNING}.
+\subsubsection{Convolutional Layer}
+Convolutional Layer bestehen vom Grundprinzip aus einer zweidimensionalen Gewichtsmatrix von Neuronen einer gewissen Höhe und Breite, auch Filter genannt, welche mit einer bestimmten Schrittweite (Stride) über ein Eingabebild- oder ein bereits vorher durch einen Convolutional Layer betrachtetes Bild wandern. Der Filter multipliziert dabei in jedem durch die Schrittweite betrachtete Ausschnitt des Bildes, die Bildpunkte mit eigenen im Filter vorhandenen und lernbaren Gewichtungen. Dann werden die gewichteten Bildpunkte aufsummiert. Es entsteht ein neuer Bildpunkt, welcher wenn ein zum Filter passendes Feature betrachtet wurde, einen hohen Wert aufweisen wird. Damit Randpixel betrachtet werden können, muss abhängig von der Filtergröße ein Padding am Rand des Bildes hinzugefügt werden. Hier sind unterschiedliche Arten wie ein Zero-Padding, also ein Auffüllen des Rands mit Nullen, denkbar. In der Abbildung \ref{fig:cnn_filter} ist ein Convolutional Layer mit einer Filtergröße von 3x3 Pixeln, einer Schrittweite von 2 und ein Zero-Padding erkennbar. Bei dieser Schrittweise ist klar zu erkennen, dass das Bild durch diese verkleinert wird. Dies ist nützlich, da hierdurch Bildauflösungen verringert werden können \cite[S.361-363]{MACHINE_LEARNING}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{cnn}
+	\vspace*{-3mm}
+	\caption[Einzelner Filter eines Convolutional Layers]{Ein einzelner Filter eines Convolutional Layers \cite[S.362]{MACHINE_LEARNING}.}
+	\label{fig:cnn_filter}
+\end{figure}
+\vspace*{-5mm}
+Die Arbeitsweise eines Filters ist sehr einfach zu visualisieren. Ein Filter, welcher in einer einzelnen Linie in einer vertikalen Ausrichtung hohe Gewichtungen aufweist, würde in einem Bild vertikale Linie hervorheben und horizontale Linie verschwimmen lassen. Dem gegenüber würde ein horizontaler Linienfilter, horizontale Linien hervorheben und vertikale verschwimmen lassen \cite[S.363-364]{MACHINE_LEARNING}. Ein Beispiel hierfür ist in folgender Abbildung zu erkennen:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{filter_example}
+	\vspace*{-3mm}
+	\caption[Beispiel für horizontale und vertikale Filter]{Ein Beispiel für horizontale und vertikale Filter \cite[S.364]{MACHINE_LEARNING}.}
+	\label{fig:cnn_filter_example}
+\end{figure}
+\vspace*{-5mm}
+In der Abbildung \ref{fig:cnn_filter_example_2} ist außerdem ein typisches Beispiel für visualisierte Filter des ersten Convolutional Layers in einem CNN zu erkennen. Es wird klar ersichtlich, dass die dargestellten Filter verschiedene Strukturen erkennen können \cite[S.132]{DEEP_LEARNING_REVOLUTION}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{cnn_filter}
+	\vspace*{-3mm}
+	\caption[Beispiel für verschiedene visualisierte Filter]{Ein Beispiel für verschiedene visualisierte Filter im ersten Convolutional Layers eines CNNs \cite[S.132]{DEEP_LEARNING_REVOLUTION}.}
+	\label{fig:cnn_filter_example_2}
+\end{figure}
+\vspace*{-5mm} 
 \section{Datensätze}
 \subsection{Sign Language MNIST Dataset}
 \subsection{ASL Alphabet Dataset}
