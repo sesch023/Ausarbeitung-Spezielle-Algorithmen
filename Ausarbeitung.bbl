@@ -320,5 +320,29 @@
     }
     \field{year}{2018}
   \endentry
+
+  \entry{DEEP_LEARNING_CV}{book}{}
+    \name{author}{1}{}{%
+      {{hash=SR}{%
+         family={Shanmugamani},
+         familyi={S\bibinitperiod},
+         given={Rajalingappaa},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Packt}%
+    }
+    \strng{namehash}{SR1}
+    \strng{fullhash}{SR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-1-78829-562-8}
+    \field{title}{Deep Learning for Computer Vision}
+    \list{location}{1}{%
+      {Birmingham}%
+    }
+    \field{year}{2018}
+  \endentry
 \enddatalist
 \endinput

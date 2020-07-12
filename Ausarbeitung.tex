@@ -655,7 +655,17 @@ Wie in der Abbildung zu sehen, gibt es pro Convolutional Layer gleich mehrere Fi
 	\label{fig:cnn_3d}
 \end{figure}
 \vspace*{-5mm}
-Die Anzahl der Feature Maps steigt in der Regel mit der Tiefe an, jedoch sollte sich ihre Größe verringern. Dies geschieht entweder über eine Schrittweite oder weiterer Methoden wie den Pooling-Layern.
+Die Anzahl der Feature Maps steigt in der Regel mit der Tiefe an, jedoch sollte sich ihre Größe verringern. Dies geschieht entweder über eine Schrittweite oder weiterer Methoden wie den Pooling Layern.
+\subsubsection{Pooling Layer}
+Pooling Layer werden genutzt um die Größe von Convolutional Layern zu verringern, indem sie zwischen diesem platziert werden und jede Feature Map oder jeden Kanal auf eine gewisse Weise verarbeiten. Die Art der Verarbeitung ist dabei abhängig vom Typ des Pooling Layers, jedoch sind Average oder Max Pooling die typischen Varianten. Beim Max Pooling wird aus einem Filter einer gewissen Höhe und Breite der Größte Wert in diesem Bereich der Feature Map entnommen. Dadurch kann dessen Größe stark verringert werden. Auch können Pooling Layer wieder eine gewisse Schrittweite (Stride) haben, mit denen die Verringerung der Größe einer Feature Map erhöht werden kann \cite[S.18-19]{DEEP_LEARNING_CV}\cite[S.369-370]{MACHINE_LEARNING}. In der Folgenden Abbildung wird die Arbeitsweise eines 2 x 2 Max Pooling mit einem Stride von 2 dargestellt: 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{pooling}
+	\vspace*{-3mm}
+	\caption[Arbeitsweise des Max Pooling]{Die Arbeitsweise des Max Pooling mit einem 2 x 2 Kernel und Stride von 2 \cite[S.19]{DEEP_LEARNING_CV}.}
+	\label{fig:pooling}
+\end{figure}
+\vspace*{-5mm}
 \section{Datensätze}
 \subsection{Sign Language MNIST Dataset}
 \subsection{ASL Alphabet Dataset}
