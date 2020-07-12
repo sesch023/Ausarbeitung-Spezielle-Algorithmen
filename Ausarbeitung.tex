@@ -646,6 +646,16 @@ In der Abbildung \ref{fig:cnn_filter_example_2} ist außerdem ein typisches Beis
 	\label{fig:cnn_filter_example_2}
 \end{figure}
 \vspace*{-5mm} 
+Wie in der Abbildung zu sehen, gibt es pro Convolutional Layer gleich mehrere Filter, die sogar Farben verarbeiten können. Zwar lassen sich mit mehreren bisher beschriebenen Filtern pro Convolutional Layer auch schon mehrere Features von Grauwertbildern (ein Grauwert pro Bildpunkt) sehr gut extrahieren, jedoch gehen so viele Bildinformationen der Farbe verloren, deshalb sind tatsächliche Filter in modernen CNNs eher dreidimensionale Matrizen. Die Höhe und Breite dieser ist weiterhin die selbe definierte Größe wie bei bisher bekannten Filtern, jedoch weisen sie in der Tiefe weitere Reihen von Filtern auf. Diese können Informationen aus den Farbkanälen extrahieren. Weiterhin können pro Convolutional Layer wie in der Abbildung zu sehen war, mehrere Filter eingesetzt werden. Daraus resultiert ein Stapel sogenannter Feature Maps auf denen erneut ein dreidimensionaler Filter angewandt werden kann \cite[S.364-365]{MACHINE_LEARNING}. Dies ist in folgender Abbildung gut zu erkennen:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{cnn_3d}
+	\vspace*{-3mm}
+	\caption[Beispiel eines CNNs mit mehreren Feature Maps]{Ein Beispiel eines CNNs mit steigenden Feature Maps pro Layer \cite[S.138]{DEEP_LEARNING_REVOLUTION}.}
+	\label{fig:cnn_3d}
+\end{figure}
+\vspace*{-5mm}
+Die Anzahl der Feature Maps steigt in der Regel mit der Tiefe an, jedoch sollte sich ihre Größe verringern. Dies geschieht entweder über eine Schrittweite oder weiterer Methoden wie den Pooling-Layern.
 \section{Datensätze}
 \subsection{Sign Language MNIST Dataset}
 \subsection{ASL Alphabet Dataset}
