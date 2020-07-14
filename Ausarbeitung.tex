@@ -666,13 +666,99 @@ Pooling Layer werden genutzt um die Größe von Convolutional Layern zu verringe
 	\label{fig:pooling}
 \end{figure}
 \vspace*{-5mm}
-Mit der Definition der Pooling Layer sind nun die Wichtigsten Grundlagen für das Maschinelle Lernen mit Bildern gesetzt. Es kann also nun mit dem praktischeren Aspekten begonnen werden.
+Mit der Definition der Pooling Layer sind nun die wichtigsten Grundlagen für das Maschinelle Lernen mit Bildern gesetzt. Es kann also nun mit dem praktischeren Aspekten begonnen werden.
 \section{Datensätze}
 \subsection{Sign Language MNIST Dataset}
 \subsection{ASL Alphabet Dataset}
 \subsection{Videodatensätze}
 \section{Entwicklungsprozess}
+Da nun die genutzten Datensätze beschrieben wurden, kann mit der Dokumentation des Entwicklungsprozesses fortgefahren werden. Hier wird wie bei Maschinellen Lernen üblich sich zunächst auf die Datenvorverarbeitung konzentriert.
+\subsection{Datenvorverarbeitung}
+Da die beiden hauptsächlich verwendeten Datensätze in einer für ihre Auflösung ausreichende Qualität vorhanden sind, müssen nur noch wenige Schritte in der Datenvorverarbeitung beachtet werden. Dies bezieht sich vor allem auf das Einlesen der Datensätze und das Skalieren der Bilder. Hier liefern Keras und Tensorflow in den neuesten tf-nightly Versionen (getestet mit 2.3.0a20200613) mit \lstinline[language=pythoninline]|image_dataset_from_directory| eine sehr mächtige Funktion, welche lediglich auf Basis von Ordnerstrukturen Bildatensätze mit passenden Labels erstellt und auch das Skalieren von Bildern übernehmen kann \cite{KERAS_IMAGE_PREPROCESSING}. Dabei wird beim Aufruf ein Tensorflow Dataset zurückgegeben, das bereits Pipelining einer gewissen Batchgröße von der Festplatte unterstützt. Dies ist bei sehr großen Datensätzen nützlich. Nun, müssen die Datensätze lediglich in passenden Ordnerstrukturen umgewandelt werden, bei denen alle Bilder einer Klasse einen Ordner mit passender Bezeichnung nutzen. Außerdem ist eine Teilung in Test, sowie Trainings- und Validierungsdaten nötig, denn \lstinline[language=pythoninline]|image_dataset_from_directory| unterstützt lediglich eine Zweiteilung. 
+\subsubsection{Sign Language MNIST Dataset}
+Dieser Datensatz besteht im Kern aus zwei CSV Dateien für Training- und Test. Die Zeilen repräsentieren dabei die 28x28 Pixel eines Grauwertbildes, sowie ein Label in der ersten Spalte. Die Label sind Zahlen von 0-25 und repräsentieren alle Buchstaben des Alphabets außer Z (25) und J (9), welche ausgelassen wurden. Trotz des Aufbaus in CSV Dateien, wurde sich entschieden die Werte zu extrahieren und als einzelne PNGs in die erforderlichen Ordnerstrukturen abzuspeichern. Der Kern der Skriptdatei zur Vorverarbeitung des Sign Language MNIST Dataset ist dabei folgende Funktion:
+\begin{lstlisting}[language=python,firstnumber=36,caption={Kern der Sign Language MNIST Dataset Vorverarbeitung.},label=lst:to_image_at_dir]
+def to_image_at_dir(target_dir, row_data, image_name):
+	"""
+	Wandelt die Zeilen einer CSV Datei im Datensatz in ein Bild um.
+	:param target_dir: Zielordner
+	:param row_data: Daten der Zeile.
+	:param image_name: Name des Bildes.
+	:return: None.
+	"""
+	# Label entnehmen.
+	label = row_data[0]
+	# Daten entnehmen in Integer umwandeln.
+	list_data = list(map(int, row_data[1::]))
+	
+	# Image Data in Numpy 28x28 Array umwandeln.
+	image_data = numpy.reshape(numpy.array(
+	list_data, dtype=numpy.uint8), (28, 28))
+	label_folder = target_dir + str(label) + "/"
+	
+	# Ordner erstellen, wenn nicht vorhanden.
+	os.makedirs(label_folder, exist_ok=True)
+	# Bild erstellen.
+	image = Image.fromarray(image_data)
+	# Bild als PNG speichern.
+	image.convert("RGB").save(label_folder + image_name + ".png")
+\end{lstlisting}
+Diese Funktion ist sehr einfach und nimmt lediglich einen Zielordner, die Daten einer Zeile des Datensatzes sowie ein Name des Bildes (zum Beispiel eine Bildnummer) an. Dann werden in Zeile 45 und 47 Label und Daten getrennt. Eine Umwandlung in Integer der Daten wird ebenfalls über eine Map-Funtkion vorgenommen. Es folgt in Zeile 50 bis 52 eine Umwandlung in ein 28x28 Numpy-Array mit Datenpunkten als 8-Bit Unsigned Integer (uint8). Zuletzt werden die Daten des Numpy-Arrays lediglich mit der bekannten Bildverarbeitungsbibliothek für Python Pillow in ein Bild umgewandelt und anschließend als PNG in RGB abgespeichert. Es wurde sich hier für PNGs statt für Grauwertbilder entschieden, da so ein problemloses Verwenden von \lstinline[language=pythoninline]|image_dataset_from_directory| möglich wird.
+\subsubsection{ASL Alphabet Dataset}
+Der ASL Alphabet Dataset ist vom Aufbau deutlich einfacher zu verarbeiten, da hier die Bilder bereits in passende Subordner des Trainingsdatensatzes sortiert sind. Die Testdaten benötigen allerdings Vorverarbeitung, da diese pro Zeichen der ASL nur ein Bild beinhalten. Dies ist nicht hinreichend für Testdaten. In der Vorverarbeitung wird also eine bestimmte Anzahl zufälliger Bilder pro ASL Zeichen aus den Trainingsdaten ausgewählt und in das passend erstellte Verzeichnis für die Testdaten umkopiert.
+\\\\
+Dies funktioniert im Kern über folgende Funktion, welche jeden Ordner für ein ASL Zeichen durchläuft und mittels der Bibliothek \lstinline[language=pythoninline]|glob| alle Dateien aus diesen ließt. Dann werden mit \lstinline[language=pythoninline]|random.sample| eine vorher definierte zufällige Anzahl von Samples (in der Praxis 300) ausgewählt und in das Zielverzeichnis des Testordners für dieses ASL Zeichen umkopiert.
+\begin{lstlisting}[language=python,firstnumber=44,caption={Kern der Sign Language MNIST Dataset Vorverarbeitung.},label=lst:to_image_at_dir]
+# Bewege die in rand_num_to_move definierte Anzahl 
+# zufälliger Elemente pro Klasse in den Testordner.
+for target_dir_name in glob.glob(target_directory + "/" + 
+		train_directory_name + "/*"):
+	
+	target_dir_classes = glob.glob(target_dir_name + "/*")
+	# Wähle für diese Klasse rand_num_to_move zufällige Elemente aus.
+	random_elements = random.sample(target_dir_classes, 
+		rand_num_to_move)
+	# Kopiere die Elemente um.
+	for move_element in random_elements:
+		new_dir = move_element.replace(train_directory_name, 
+			test_directory_name)
+		os.makedirs(os.path.dirname(new_dir), exist_ok=True)
+		shutil.move(move_element, new_dir)
+\end{lstlisting}
+\subsubsection{DatasetParser Pakete}
+Das Ziel der DatasetParser Python Pakete ist es, für alle vorverarbeiteten Datensätze eine vereinigte Schnittstelle zum Bereitstellen von Datensätzen zu liefern. Diese bestehen aus einer DatasetParser Datei mit den Funktionen \lstinline[language=pythoninline]|get_train_and_val| und \lstinline[language=pythoninline]|get_test|, welche Trainings-, Test- und Validierungsdaten bereitstellen, sowie den Konstanten \lstinline[language=pythoninline]|class_names| und \lstinline[language=pythoninline]|image_size|, die Klassennamen (im Bezug auf die Ordner der vorverarbeiteten Datensätze) und eine standardmäßige Bildgröße definieren. Eine weitere in den Paketen nötige Skriptdatei ist DatasetPrepareOrig. Diese führt mittels einer separaten Ausführung eine in den vorherigen Kapiteln beschriebene Vorverarbeitung aus. Der Datensatz selber ist nun in DatasetOrig, als nicht verarbeiteter Datensatz, und in DatasetPrepared, als durch das Skript vorverarbeiteter Datensatz, definiert.
+\\\\
+Die Arbeitsweise der DatasetParser Dateien ist nun sehr einfach zu beschreiben. Diese führen beim Aufruf von \lstinline[language=pythoninline]|get_train_and_val| zweimal die Tensorflow-Funktion \lstinline[language=pythoninline]|image_dataset_from_directory| mit vom Datensatz abhängigen Parametern auf und geben die Ergebnisse dieser zurück. Wird unter der Angabe des Parameters \lstinline[language=pythoninline]|validation_split| diese Funktion auf ein Verzeichnis zweimal ausgeführt, so gibt Tensorflow beim ersten Aufruf das Dataset der Trainings- und beim zweiten das Dataset der Validierungsdaten zurück. Die Testdaten der Funktion \lstinline[language=pythoninline]|get_test| werden über einen einzelnen Aufruf ohne \lstinline[language=pythoninline]|validation_split| zurückgegeben.
+\begin{lstlisting}[language=python,firstnumber=1,caption={Beispielhafter Aufruf der Funktion zum Einlesen von Daten},label=lst:dataset]
+return image_dataset_from_directory(
+	directory="datasets/kaggle_1/DatasetPrepared/train",
+	label_mode='categorical',
+	color_mode='grayscale',
+	image_size=image_size_param,
+	batch_size=batch_size,
+	shuffle=shuffle,
+	seed=seed,
+	validation_split=validation_split,
+	subset="training",
+	interpolation='bilinear',
+	follow_links=False
+)
+\end{lstlisting}
+Im Listing \ref{lst:dataset} wird ein Aufruf der Funktion \lstinline[language=pythoninline]|image_dataset_from_directory| beschrieben. Die wichtigsten Parameter haben dabei folgende Aufgaben:
+\begin{itemize}
+	\item \lstinline[language=pythoninline]|directory|: Das Verzeichnis aus dem der Datensatz gelesen wird.
+	\item \lstinline[language=pythoninline]|label_mode|: Bei "categorical" werden die Subordner als Kategorien gesehen und als One-Hot kodierten Vektor beschrieben.
+	\item \lstinline[language=pythoninline]|color_mode|: Umgewandelte Farbkanäle der Bilder.
+	\item \lstinline[language=pythoninline]|image_size|: Skalierte Größe der Bilder.
+	\item \lstinline[language=pythoninline]|batch_size|: Größe der Batches des Datasets.
+	\item \lstinline[language=pythoninline]|shuffle|: Werden die Bilder nach dem Einlesen zufällig angeordnet.
+	\item \lstinline[language=pythoninline]|validation_split|: Anteil der Validierungsdaten.
+	\item \lstinline[language=pythoninline]|subset|: Das zurückgegebene Subset für dieses Verzeichnis. Dieses ist entweder "training" oder "validation".
+	\item \lstinline[language=pythoninline]|interpolation|: Genutztes Verfahren für die Skalierung.
+\end{itemize}
+Damit ist nun die Datenvorverarbeitung abgeschlossen und die Bilder der Datensätze können sehr einfach in passende Tensorflow-Datasets gelesen werden. Nun, wird die Entwicklung und Auswertung von Modellen beschrieben.
 \subsection{Entwickelte Modelle}
+\subsubsection{Grundaufbau der Trainingsdateien}
 \subsubsection{Neuronale Netze}
 \subsubsection{Konvolutionelle Neuronale Netze}
 \subsubsection{Transferlearning mittels VGG19}

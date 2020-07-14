@@ -344,5 +344,23 @@
     }
     \field{year}{2018}
   \endentry
+
+  \entry{KERAS_IMAGE_PREPROCESSING}{online}{}
+    \name{author}{1}{}{%
+      {{hash=k}{%
+         family={keras},
+         familyi={k\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{k1}
+    \strng{fullhash}{k1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Image data preprocessing}
+    \verb{url}
+    \verb https://keras.io/api/preprocessing/image/
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
 \enddatalist
 \endinput
