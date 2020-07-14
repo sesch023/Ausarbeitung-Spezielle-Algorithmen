@@ -841,7 +841,7 @@ evaluate(numpy.argmax(pred, axis=1),
 \end{lstlisting}
 Abschließend sei erwähnt, dass die Auswertungsergebnisse der Testdaten nur in Betracht gezogen wurden, wenn bereits einige andere Modelle mit Validierungsdaten getestet wurden. Ein anderes Auswertungsverhalten würde die in Kapitel \ref{validation} genannten Grundsätze verletzen.
 \subsubsection{Neuronale Netze}
-Zunächst wurde der Einsatz einfacher Neuronaler Netze erprobt. Da diese grade bei großen Bildern in der Regel von CNNs abgelöst wurden, wurden hier nur wenige Tests ausgeführt. Selbst bei großen Modellen und ohne vorliegenden Overfitting Effekten, konnte maximal eine Vorhersagegenauigkeit von 80\% erreicht werden. Eines dieser Modelle, welches für das Sign Language MNIST Dataset verwendet wurde, ist in folgender Abbildung zu erkennen: 
+Zunächst wurde der Einsatz einfacher Neuronaler Netze erprobt. Da diese grade bei großen Bildern in der Regel von CNNs abgelöst wurden, wurden hier nur wenige Tests ausgeführt. Selbst bei großen Modellen und ohne vorliegenden Overfitting Effekten, konnte maximal eine Vorhersagegenauigkeit von 80\% erreicht werden. Grundsätzlich wurde versucht in der Eingabeschicht in etwa ein Neuron pro Bildpunkt zu nutzen. Diese sollten dann in jedem Layer mit einer abnehmenden Schichtgröße immer weiter heruntergerechnet werden, bis es sinnvoll wurde die Ausgabeschicht anzusetzen. Auf dieser Basis wurden viele Netzstrukturen erprobt. Eines dieser Modelle, welches für das Sign Language MNIST Dataset verwendet wurde, ist in folgender Abbildung zu erkennen: 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.50\textwidth]{nn_1}
@@ -850,10 +850,29 @@ Zunächst wurde der Einsatz einfacher Neuronaler Netze erprobt. Da diese grade b
 	\label{fig:nn_1}
 \end{figure}
 \vspace*{-5mm}
-Dieser erreicht auf dem genutzten Datensatz lediglich eine Vorhersagegenauigkeit von 78\% auf den Validierungsdaten. Auf den Testdaten erreicht dieses Modell 81\% Vorhersagegenauigkeit und F1-Score. Dies ist zwar etwas besser, jedoch nicht in einem gewünschten Bereich.
+Dieser erreicht auf dem genutzten Datensatz lediglich eine Vorhersagegenauigkeit von 78\% auf den Validierungsdaten. Auf den Testdaten erreicht dieses Modell 81\% Vorhersagegenauigkeit. Dies ist zwar etwas besser, jedoch nicht in einem gewünschten Bereich.
 \\\\
-Mit dem ASL-Alphabet Dataset gibt es noch größere Probleme im Einsatz normaler Neuronaler Netze. Die Bilder weisen alle eine Größe von 200x200 Pixeln auf, was in einer Eingabegröße von 40000 Pixeln mit drei Kanälen resultieren würde. Die eingegebenen Bilder werden beim Einlesen daher auf 50x50 Grauwerte reduziert. Selbst damit wurde ein siebter Layer mit 2048 ELU-Neuronen an den Anfang des Netzes eingeführt werden, um die 2500 Eingabewerte sinnvoll aufnehmen zu können.
+Mit dem ASL-Alphabet Dataset gibt es noch größere Probleme im Einsatz normaler Neuronaler Netze. Die Bilder weisen alle eine Größe von 200x200 Pixeln auf, was in einer Eingabegröße von 40000 Pixeln mit drei Kanälen resultieren würde. Die eingegebenen Bilder werden beim Einlesen daher auf 50x50 Grauwerte reduziert. Selbst damit wurde ein siebter Layer mit 2048 ELU-Neuronen an den Anfang des Netzes eingeführt, um die 2500 Eingabewerte sinnvoll aufnehmen zu können. Trotz dieser Änderung und dem Test weiterer Netzstrukturen zeigen sich die Probleme für diesen Datensatz klar. Es konnte dabei maximal eine Vorhersagegenauigkeit 67\% erreicht werden. Grade im ASL-Alphabet Dataset wird daher klar, dass für die Lösung dieser Aufgabe Konvolutionelle Neuronale Netze sinnvoller sind.
 \subsubsection{Konvolutionelle Neuronale Netze}
+Beim Training der Konvolutionellen Neuronale Netze wurden besonders für den ASL-Alphabet Dataset viele Modellstrukturen erprobt. Es wurde sich für eine wie in dem VGG19 vorhandene typische Verdopplung der Feature Maps entschieden \cite{VGG19}, wobei gleichzeitig weniger Convolutional Layer verwendet wurden, um Overfitting zu vermeiden. Gleichzeitig konnten mit dem Einsatz von Stride zum leichten herunterrechnen der Bildinformationen gute Erfahrungen erzielt werden. Für die vollständig verbundenen Schichten wurde sich für einen ähnlichen Aufbau wie im vorherigen Kapitel entschieden. Mit dem Sign Language MNIST Dataset konnten zwar bessere Ergebnisse erzielt werden als mit einfachen Neuronalen Netzen, jedoch zeigt sich hier klar die geringe Auflösung der Bilder mit 28x28 Pixeln. In allen erprobten Modellstrukturen wurden schlechtere Ergebnisse erzielt als für den ASL-Alphabet Dataset. Ein eingesetztes Modell für diesen mit guten Ergebnissen ist in Folgender Abbildung dargestellt:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{cnn_example_kaggle_1}
+	\vspace*{-3mm}
+	\caption[Eingesetztes CNN für den Sign Language MNIST Dataset]{Ein Eingesetztes CNN für den Sign Language MNIST Dataset.}
+	\label{fig:cnn_example_kaggle_1}
+\end{figure}
+\vspace*{-5mm}
+Zwar konnten mit diesen Modell eine hundertprozentige Genauigkeit für die Validierungsdaten erreicht werden, es war jedoch nie eine komplette Generalisierung für die Testdaten zu erkennen. Diese erreichen maximale Genauigkeiten von 75\%. Die Gründe für das schlechtere Abschneiden konnten bisher nicht herausgefunden werden. Es wären Fehler in der Vorverarbeitung, dem Einlesen, eine starke Abweichung der Testdaten von den Trainings- und Validierungsdaten oder Overfitting denkbar. Leider konnten dies nicht perfekt gelöst werden und aufgrund besserer Ergebnisse für den ASL-Alphabet Dataset, wurde sich nun auf diesen konzentriert. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{cnn_used_kaggle_2}
+	\vspace*{-3mm}
+	\caption[Eingesetztes CNN für den ASL-Alphabet Dataset]{Ein Eingesetztes CNN für den ASL-Alphabet Dataset.}
+	\label{fig:cnn_used_kaggle_2}
+\end{figure}
+\vspace*{-5mm}
+% Hier weiter
 \subsubsection{Transfer Learning mittels VGG19}
 Bei vielen Problemen des maschinellen Lernens, ist es sinnvoll ganze oder Teile von vortrainierten Modellen zu verwenden. Dies ist besonders bei vielen Bereichen der Bilderkennung sinnvoll und üblich. Die Wiederverwendung von Modellen wird auch als Transfer Learning bezeichnet \cite[S.287]{MACHINE_LEARNING}. Ein solches Modell soll nun auch in diesem Projekt angewandt werden. Es wurde sich für das VGG19 entschieden, da dieses laut der basierenden Arbeit eine sehr gute Generalisierung für andere Datensätze besitzt und von Keras unterstützt wird \cite{VGG19}. Es ist folgendermaßen aufgebaut:
 \begin{figure}[H]

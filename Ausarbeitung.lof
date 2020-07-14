@@ -35,4 +35,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {17}{\ignorespaces Eingesetztes Neuronales Netz mit fünf Hidden-Layern}}{35}{figure.17}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {18}{\ignorespaces Aufbau des VGG19}}{37}{figure.18}
+\contentsline {figure}{\numberline {18}{\ignorespaces Eingesetztes CNN für den Sign Language MNIST Dataset}}{37}{figure.18}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {19}{\ignorespaces Eingesetztes CNN für den ASL-Alphabet Dataset}}{37}{figure.19}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {20}{\ignorespaces Aufbau des VGG19}}{38}{figure.20}
