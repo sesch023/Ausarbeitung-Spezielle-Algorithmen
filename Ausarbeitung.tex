@@ -309,6 +309,7 @@ Arbeit an keiner anderen Stelle zur Erlangung eines Abschlusses vorgelegt.
 \ohead[\pagemark]{\pagemark}
 \ihead[]{\headmark}
 \setcounter{equation}{0}
+\pagebreak
 \section{Einleitung}
 \section{Eingrenzung}
 \section{Theoretische Grundlagen}
@@ -442,6 +443,7 @@ Zuletzt sei mit dem F1-Score \eqref{eq:fone} ein beliebtes Qualitätsmaß genann
 \end{equation}\myequations{F1-Score} \\ 
 Da nun alle typischen Qualitätsmaße eingeführt wurden, können im nächsten Kapitel typische Richtlinien zum Vergleichen der Performanz von Modellen beschrieben werden.
 \subsubsection{Testen und Validieren}
+\label{validation}
 Eine gute Performanz während des Trainings eines Modells bedeutet noch keine gute tatsächliche Leistung. Overfitting oder andere Effekte können eine Qualität vortäuschen, welche im echten Einsatz aufgrund einer Spezialisierung des Modells auf die Trainingsdaten nicht erreicht wird. Es haben sich hier zwei typischen Verfahren etabliert, um damit umzugehen. 
 \\\\
 Zum einen kann ein Trainingsdatensatz in drei Teile, einem tatsächlichen Trainingsdatensatz, einen Validierungsdatensatz und einen Testdatensatz unterteilt werden. Eine typische Unterteilung hierfür ist 80\% für das Training und jeweils 10\% für Validierung und Test zu reservieren. Das Modell wird dann wie bisher mit dem Trainingsdatensatz angelernt und im folgenden mit dem Valdierungsdatensatz geprüft. Dann wird das Modell optimiert und der Vorgang wiederholt bis eine gewünschte Qualität erreicht wurde. Ist dies  abgeschlossen, ist eine letzte Überprüfung nötig. Da während des Optimierungsvorgangs eine Spezialisierung auf Trainings- und Validierungsdaten stattgefunden haben könnte, muss mit dem bisher unbekannten Testdatensatz eine erreichte Verallgemeinerung des Wissens im Modell überprüft werden. Wurde keine ausreichende Performanz festgestellt, muss der gesamte Trainingsvorgang wiederholt werden bis ein Modell die gewünschte Qualität erreicht \cite[S.30-31]{MACHINE_LEARNING}\cite[S.43-44]{BA}.
@@ -747,18 +749,97 @@ return image_dataset_from_directory(
 Im Listing \ref{lst:dataset} wird ein Aufruf der Funktion \lstinline[language=pythoninline]|image_dataset_from_directory| beschrieben. Die wichtigsten Parameter haben dabei folgende Aufgaben:
 \begin{itemize}
 	\item \lstinline[language=pythoninline]|directory|: Das Verzeichnis aus dem der Datensatz gelesen wird.
-	\item \lstinline[language=pythoninline]|label_mode|: Bei "categorical" werden die Subordner als Kategorien gesehen und als One-Hot kodierten Vektor beschrieben.
+	\item \lstinline[language=pythoninline]|label_mode|: Bei categorical werden die Subordner als Kategorien gesehen und als One-Hot kodierten Vektor beschrieben.
 	\item \lstinline[language=pythoninline]|color_mode|: Umgewandelte Farbkanäle der Bilder.
 	\item \lstinline[language=pythoninline]|image_size|: Skalierte Größe der Bilder.
 	\item \lstinline[language=pythoninline]|batch_size|: Größe der Batches des Datasets.
 	\item \lstinline[language=pythoninline]|shuffle|: Werden die Bilder nach dem Einlesen zufällig angeordnet.
 	\item \lstinline[language=pythoninline]|validation_split|: Anteil der Validierungsdaten.
-	\item \lstinline[language=pythoninline]|subset|: Das zurückgegebene Subset für dieses Verzeichnis. Dieses ist entweder "training" oder "validation".
+	\item \lstinline[language=pythoninline]|subset|: Das zurückgegebene Subset für dieses Verzeichnis. Dieses ist entweder training oder validation.
 	\item \lstinline[language=pythoninline]|interpolation|: Genutztes Verfahren für die Skalierung.
 \end{itemize}
-Damit ist nun die Datenvorverarbeitung abgeschlossen und die Bilder der Datensätze können sehr einfach in passende Tensorflow-Datasets gelesen werden. Nun, wird die Entwicklung und Auswertung von Modellen beschrieben.
+Da die Datensätze für ihre Auflösung alle eine sehr rauschfreies Bild aufweisen und in der Regel schon recht gut auf die Hände fokussiert sind, ist damit nun die Datenvorverarbeitung abgeschlossen und die Bilder der Datensätze können sehr einfach in passende Tensorflow-Datasets gelesen werden. Nun, wird die Entwicklung und Auswertung von Modellen beschrieben.
 \subsection{Entwickelte Modelle}
-\subsubsection{Grundaufbau der Trainingsdateien}
+In diesem Kapitel wir der Grundaufbau der Python-Dateien zum Maschinellen Lernen vorgestellt und die Ergebnisse einiger Modelle vorgestellt. Dabei werden für Neuronale Netze, Konvolutionelle Neuronale Netze und Transferlearning einige der besten Versuche vorgestellt. 
+\subsubsection{Grundaufbau des Modelltrainings}
+Alle Dateien für das Training von Modellen haben grundsätzlich einen ähnlichen Aufbau. Zunächst müssen die DatasetParser der gewünschten Datensätze inkludiert werden mit welchen ein Großteil der Datenvorverarbeitung schon erledigt werden kann. Danach folgen in der Regel einige Definitionen für Batchgröße und Bildgröße, mit welchen nun die Funktionen \lstinline[language=pythoninline]|get_train_and_val| und \lstinline[language=pythoninline]|get_test| aufgerufen werden können. Dank sinnvoller Default-Parameter ist dieser Aufruf in der Regel recht kurz. Es wurde ein 80-20 Validation Split unter einer in Kapitel \ref{validation} beschriebenen Validierung in drei Stufen verwendet. Am Ende der Vorbereitung wird in der Regel noch die Anzahl der Klassen für die Ausgabe und die Größe der Eingabe für den ersten Layer des Modells definiert. Ein Beispiel für die Vorbereitung des Trainings ist im folgenden Listing zu erkennen:
+\begin{lstlisting}[language=python,firstnumber=1,caption={Beispielhafte Vorbereitung für das Training},label=lst:pre_train]
+from sign_language_image.datasets.kaggle_1.DatasetParser
+	import get_train_and_val, get_test, class_names 
+...
+# Batchgröße
+batch_size = 100
+# Bildgröße
+image_size = (28, 28)
+train_ds, val_ds = get_train_and_val(batch_size, 
+	image_size_param=image_size)
+test_ds = get_test(image_size_param=image_size)
+
+# Anzahl der Klassen aus den Namen der Klassen extrahieren
+num_of_classes = len(class_names)
+# Input Shape als Bildgröße + Farbkanäle
+input_shape = (image_size[0], image_size[1], 1)
+\end{lstlisting}
+Danach kann dann schon ein Modell definiert werden. Diese können sich je nach Aufbau etwas unterscheiden, daher wird auf sie und ihre Ergebnisse in den nächsten Kapiteln eingegangen.
+\\\\
+Nach der Definition eines Modells kann dieses kompiliert und mit einem Optimizer und Qualitätsmaß versehen werden. Hier wurde aufgrund des Aufbaus der Daten und des Lernziels die Kreuzentropie genutzt. Außerdem wird ein Modell während der Optimierung über die Vorhersagegenauigkeit auf Trainings- und Validierungsdaten ausgewertet. Dies ist aufgrund der gleichmäßigen Verteilung und Priorität der Klassen in den Datensätzen möglich. Als Optimierer wird eine Erweiterung des stochastische Gradientenverfahren den Adam-Optimierer genutzt.
+\begin{lstlisting}[language=python,firstnumber=1,caption={Kompilierung eines Modells},label=lst:compile_model]
+# Modell kompilieren mit Kreuzentropie und Adam Optimizer.
+model.compile(loss='categorical_crossentropy',
+	optimizer=tf.keras.optimizers.Adam(lr=0.00005),
+	metrics=['accuracy'])
+\end{lstlisting}
+Dann wurde eine Funktion für das Loggen entwickelt. Diese kopiert das momentan aktive Skript in einen eigenen Ordner eines übergebenen Logverzeichnisses. Dieses dient als Referenz, wenn die originale Trainingsdatei verändert wurde. Dann wird abhängig von einem Parameter die Ausgabe der Konsole in eine Logdatei in dem vorher erstellten Verzeichnis umgeleitet, um später den Trainingsvorgang nachvollziehen zu können. Zuletzt werden zwei Tensorflow-Callbacks für das Verzeichnis erstellt, welche TensorBoard-Logs erstellen und die Modelle mit dem geringsten Fehler abspeichern.
+\begin{lstlisting}[language=python,firstnumber=1,caption={Logging Funktion für Trainingsvorgänge},label=lst:log_train]
+def log_run(log_dir, log_to_file=True):
+	script_path = sys.argv[0]
+	script_name = os.path.basename(script_path)
+	log_dir_script = log_dir + script_name + "_" + 	 datetime.now().strftime("%d-%m-%Y_%H%M%S") + "/"
+	# Erstelle das Log Verzeichnis
+	os.makedirs(log_dir_script)
+	# Kopiere das Script, welches ausgeführt wurde in das Log Verzeichnis
+	shutil.copy(script_path, log_dir_script + script_name)
+	# Leite Ausgabe der Konsole um
+	if log_to_file:
+		print("Starting Log To File!")
+		sys.stdout = open(log_dir_script + script_name + 
+			".log.txt", "w")
+	
+	# Erstelle und gebe Callbacks für das Log-Verzeichnis zurück.
+	return tf.keras.callbacks.TensorBoard(
+		log_dir=log_dir_script, profile_batch=5), \
+		tf.keras.callbacks.ModelCheckpoint(log_dir_script + 'model.mdl_wts.hdf5', save_best_only=True,
+		monitor='val_loss', mode='min'), log_dir_script
+\end{lstlisting}
+Im Folgenden wird lediglich nur noch ein Callback eingeführt, welches das Training nach einer gewissen Zahl von Durchläufe in welchen sich der Fehler des Modells nicht verbessert abbricht. Dann kann das Modell mit Trainingsdaten und Validierungsdaten zur Überprüfung folgendermaßen für eine maximale Anzahl von Epochen antrainiert werden:
+\begin{lstlisting}[language=python,firstnumber=1,caption={Start des Trainings mit Keras},label=lst:train_start]
+model.fit(train_ds,
+	epochs=50,
+	verbose=1,
+	validation_data=val_ds,
+	callbacks=[tensorboard_callback, checkpoint, es])
+\end{lstlisting}
+Nach dem Trainingsvorgang wird nun die beste Epoche aus dem Logverzeichnis geladen und mit den Testdaten überprüft. Dann wird zunächst die \lstinline[language=pythoninline]|evaluate| Methode des Keras-Modells genutzt, um eine Vorhersagegenauigkeit und den Fehler auf den Testdaten zu bestimmen. Zum Schluss wird mittels Scikit-Learn in der eigens definierte \lstinline[language=pythoninline]|evaluate| Funktion eine Konfusionsmatrize und Auswertungstabelle mit Precision, Recall und F1-Score zu den Testdaten erstellt. Dies ist im folgenden Listing erkennbar:
+\begin{lstlisting}[language=python,firstnumber=1,caption={Auswertung eines Modells mit Testdaten},label=lst:modell_eval]
+# Lade das beste Modell
+model = load_model(run_path + "model.mdl_wts.hdf5")
+# Score auf den Testdaten
+score = model.evaluate(test_ds, verbose=1)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+
+# Entnehme aus dem Test Datensatz, zur Anwendung mit sklearn
+test_data_labels = []
+for data, label in test_ds.take(-1):
+	test_data_labels.extend(label)
+
+# Prediction für den Test Datensatz
+pred = model.predict(test_ds, verbose=1)
+# Evaluiere die Ergebnisse vom Testdatensatz mit sklearn
+evaluate(numpy.argmax(pred, axis=1), 
+	numpy.argmax(test_data_labels, axis=1))
+\end{lstlisting}
+Abschließend sei erwähnt, dass die Auswertungsergebnisse der Testdaten nur in Betracht gezogen wurden, wenn bereits einige andere Modelle mit Validierungsdaten getestet wurden. Ein anderes Auswertungsverhalten würde die in Kapitel \ref{validation} genannten Grundsätze verletzen.
 \subsubsection{Neuronale Netze}
 \subsubsection{Konvolutionelle Neuronale Netze}
 \subsubsection{Transferlearning mittels VGG19}

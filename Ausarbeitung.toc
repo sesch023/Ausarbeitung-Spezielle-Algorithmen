@@ -3,31 +3,31 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Eigenständigkeitserklärung}{}{paragraph*.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.}Einleitung}{1}{section.1}
+\contentsline {section}{\numberline {1.}Einleitung}{2}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.}Eingrenzung}{1}{section.2}
+\contentsline {section}{\numberline {2.}Eingrenzung}{2}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.}Theoretische Grundlagen}{1}{section.3}
+\contentsline {section}{\numberline {3.}Theoretische Grundlagen}{2}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.}Allgemeine Grundlagen des Maschinellen Lernens}{1}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1.}Allgemeine Grundlagen des Maschinellen Lernens}{2}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.1.1.}Arten von Verfahren des Maschinellen Lernens}{2}{subsubsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.2.}Typische Probleme beim Maschinellen Lernen}{3}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.2.}Typische Probleme beim Maschinellen Lernen}{4}{subsubsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.3.}Datenvorverarbeitung für Bilddaten}{5}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.3.}Datenvorverarbeitung für Bilddaten}{6}{subsubsection.3.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.4.}Qualitätsmaße}{6}{subsubsection.3.1.4}
+\contentsline {subsubsection}{\numberline {3.1.4.}Qualitätsmaße}{7}{subsubsection.3.1.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.1.5.}Testen und Validieren}{10}{subsubsection.3.1.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.}Neuronale Netze}{11}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.1.}Biologische Grundlagen}{11}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.1.}Biologische Grundlagen}{12}{subsubsection.3.2.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.2.2.}Künstliche Neuronen}{12}{subsubsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.3.}Einschichtige Neuronale Netze}{13}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.3.}Einschichtige Neuronale Netze}{14}{subsubsection.3.2.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.2.4.}Gradientenabstiegsverfahren}{15}{subsubsection.3.2.4}
 \defcounter {refsection}{0}\relax 
@@ -63,24 +63,24 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {5.1.3.}DatasetParser Pakete}{29}{subsubsection.5.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.}Entwickelte Modelle}{31}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.2.}Entwickelte Modelle}{30}{subsection.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.1.}Grundaufbau der Trainingsdateien}{31}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.1.}Grundaufbau des Modelltrainings}{30}{subsubsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.2.}Neuronale Netze}{31}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.2.}Neuronale Netze}{34}{subsubsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.3.}Konvolutionelle Neuronale Netze}{31}{subsubsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.3.}Konvolutionelle Neuronale Netze}{34}{subsubsection.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.4.}Transferlearning mittels VGG19}{31}{subsubsection.5.2.4}
+\contentsline {subsubsection}{\numberline {5.2.4.}Transferlearning mittels VGG19}{34}{subsubsection.5.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.}Backend der Webanwendung}{31}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.3.}Backend der Webanwendung}{34}{subsection.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.}Frontend der Webanwendung}{31}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.4.}Frontend der Webanwendung}{34}{subsection.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.}Ergebnisse der Entwicklung}{31}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.5.}Ergebnisse der Entwicklung}{34}{subsection.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.}Fazit}{31}{section.6}
+\contentsline {section}{\numberline {6.}Fazit}{34}{section.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.}Ausblick}{31}{section.7}
+\contentsline {section}{\numberline {7.}Ausblick}{34}{section.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.}Quellen}{32}{section.8}
+\contentsline {section}{\numberline {8.}Quellen}{35}{section.8}
