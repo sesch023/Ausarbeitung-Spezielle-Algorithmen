@@ -841,8 +841,30 @@ evaluate(numpy.argmax(pred, axis=1),
 \end{lstlisting}
 Abschließend sei erwähnt, dass die Auswertungsergebnisse der Testdaten nur in Betracht gezogen wurden, wenn bereits einige andere Modelle mit Validierungsdaten getestet wurden. Ein anderes Auswertungsverhalten würde die in Kapitel \ref{validation} genannten Grundsätze verletzen.
 \subsubsection{Neuronale Netze}
+Zunächst wurde der Einsatz einfacher Neuronaler Netze erprobt. Da diese grade bei großen Bildern in der Regel von CNNs abgelöst wurden, wurden hier nur wenige Tests ausgeführt. Selbst bei großen Modellen und ohne vorliegenden Overfitting Effekten, konnte maximal eine Vorhersagegenauigkeit von 80\% erreicht werden. Eines dieser Modelle, welches für das Sign Language MNIST Dataset verwendet wurde, ist in folgender Abbildung zu erkennen: 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.50\textwidth]{nn_1}
+	\vspace*{-3mm}
+	\caption[Eingesetztes Neuronales Netz mit fünf Hidden-Layern]{Ein eingesetztes Neuronales Netz mit fünf Hidden-Layern.}
+	\label{fig:nn_1}
+\end{figure}
+\vspace*{-5mm}
+Dieser erreicht auf dem genutzten Datensatz lediglich eine Vorhersagegenauigkeit von 78\% auf den Validierungsdaten. Auf den Testdaten erreicht dieses Modell 81\% Vorhersagegenauigkeit und F1-Score. Dies ist zwar etwas besser, jedoch nicht in einem gewünschten Bereich.
+\\\\
+Mit dem ASL-Alphabet Dataset gibt es noch größere Probleme im Einsatz normaler Neuronaler Netze. Die Bilder weisen alle eine Größe von 200x200 Pixeln auf, was in einer Eingabegröße von 40000 Pixeln mit drei Kanälen resultieren würde. Die eingegebenen Bilder werden beim Einlesen daher auf 50x50 Grauwerte reduziert. Selbst damit wurde ein siebter Layer mit 2048 ELU-Neuronen an den Anfang des Netzes eingeführt werden, um die 2500 Eingabewerte sinnvoll aufnehmen zu können.
 \subsubsection{Konvolutionelle Neuronale Netze}
-\subsubsection{Transferlearning mittels VGG19}
+\subsubsection{Transfer Learning mittels VGG19}
+Bei vielen Problemen des maschinellen Lernens, ist es sinnvoll ganze oder Teile von vortrainierten Modellen zu verwenden. Dies ist besonders bei vielen Bereichen der Bilderkennung sinnvoll und üblich. Die Wiederverwendung von Modellen wird auch als Transfer Learning bezeichnet \cite[S.287]{MACHINE_LEARNING}. Ein solches Modell soll nun auch in diesem Projekt angewandt werden. Es wurde sich für das VGG19 entschieden, da dieses laut der basierenden Arbeit eine sehr gute Generalisierung für andere Datensätze besitzt und von Keras unterstützt wird \cite{VGG19}. Es ist folgendermaßen aufgebaut:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.80\textwidth]{vgg_19_img}
+	\vspace*{-3mm}
+	\caption[Aufbau des VGG19]{Der Aufbau des VGG19 \cite{VGG_19_IMG}.}
+	\label{fig:vgg_19}
+\end{figure}
+\vspace*{-5mm}
+Es ist zu beachten, dass sich Filter der selben Größe mehrfach wiederholen, sodass mit den vollständig verbundenen Schichten ein Konvolutionelles Neuronales Netz mit 19 Layern entsteht. Die vollständig verbundenen Schichten können in Keras ausgeschaltet werden, was in diesem Fall des Transfer Learning aufgrund der unterschiedlichen Zahl von nützlichen Ausgabeneuronen (das Netz sieht 1000 vor) sinnvoll ist. 
 \subsection{Backend der Webanwendung}
 \subsection{Frontend der Webanwendung}
 \subsection{Ergebnisse der Entwicklung}

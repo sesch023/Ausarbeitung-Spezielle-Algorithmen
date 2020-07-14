@@ -18,47 +18,53 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Ausarbeitung-blx.bib
 Database file #2: Quellen.bib
+I was expecting a `,' or a `}'---line 112 of file Quellen.bib
+ :  
+ :  url = {https://www.researchgate.net/publication/325137356_Breast_cancer_screening_using_convolutional_neural_network_and_follow-up_digital_mammography},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Biblatex version: 3.8
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 13 entries,
+You've used 15 entries,
             6268 wiz_defined-function locations,
-            1264 strings with 10566 characters,
-and the built_in function-call counts, 90844 in all, are:
-= -- 4488
-> -- 7134
-< -- 690
-+ -- 6712
-- -- 5649
-* -- 3959
-:= -- 11281
+            1279 strings with 10956 characters,
+and the built_in function-call counts, 107255 in all, are:
+= -- 5421
+> -- 8193
+< -- 829
++ -- 7748
+- -- 6433
+* -- 4779
+:= -- 13177
 add.period$ -- 0
-call.type$ -- 13
+call.type$ -- 15
 change.case$ -- 0
-chr.to.int$ -- 414
-cite$ -- 24
-duplicate$ -- 7719
-empty$ -- 6564
-format.name$ -- 665
-if$ -- 14842
+chr.to.int$ -- 468
+cite$ -- 28
+duplicate$ -- 9257
+empty$ -- 7746
+format.name$ -- 814
+if$ -- 17729
 int.to.chr$ -- 0
-int.to.str$ -- 42
+int.to.str$ -- 50
 missing$ -- 0
-newline$ -- 360
-num.names$ -- 750
-pop$ -- 4099
+newline$ -- 431
+num.names$ -- 900
+pop$ -- 4790
 preamble$ -- 1
-purify$ -- 395
+purify$ -- 490
 quote$ -- 0
-skip$ -- 3319
+skip$ -- 3976
 stack$ -- 0
-substring$ -- 7547
-swap$ -- 2046
-text.length$ -- 424
+substring$ -- 9022
+swap$ -- 2441
+text.length$ -- 497
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 430
+type$ -- 498
 warning$ -- 0
-while$ -- 928
+while$ -- 1104
 width$ -- 0
-write$ -- 348
+write$ -- 417
+(There was 1 error message)

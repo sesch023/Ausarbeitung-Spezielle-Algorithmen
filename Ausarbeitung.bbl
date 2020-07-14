@@ -362,5 +362,78 @@
     \endverb
     \warn{\item Invalid format of field 'urldate'}
   \endentry
+
+  \entry{VGG19}{thesis}{}
+    \name{author}{2}{}{%
+      {{hash=ZA}{%
+         family={Zisserman},
+         familyi={Z\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SK}{%
+         family={Simonyan},
+         familyi={S\bibinitperiod},
+         given={Karen},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZASK1}
+    \strng{fullhash}{ZASK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Very Deep Convolutional Networks for Large-Scale Image
+  Recognition}
+    \verb{url}
+    \verb https://arxiv.org/pdf/1409.1556.pdf
+    \endverb
+    \list{location}{1}{%
+      {Oxford}%
+    }
+    \list{institution}{1}{%
+      {University of Oxford}%
+    }
+    \field{year}{2014}
+    \field{urlday}{14}
+    \field{urlmonth}{07}
+    \field{urlyear}{2020}
+  \endentry
+
+  \entry{VGG_19_IMG}{thesis}{}
+    \name{author}{3}{}{%
+      {{hash=ZY}{%
+         family={Zheng},
+         familyi={Z\bibinitperiod},
+         given={Yufeng},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=YC}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Clifford},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Merkulov},
+         familyi={M\bibinitperiod},
+         given={Aleksey},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZYYCMA1}
+    \strng{fullhash}{ZYYCMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Breast cancer screening using convolutional neural network
+  and follow-up digital mammography}
+    \list{location}{1}{%
+      {Connecticut}%
+    }
+    \list{institution}{1}{%
+      {University of Connecticut}%
+    }
+    \field{month}{05}
+    \field{year}{2018}
+  \endentry
 \enddatalist
 \endinput
