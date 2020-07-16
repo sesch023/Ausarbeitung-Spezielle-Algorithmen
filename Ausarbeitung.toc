@@ -3,84 +3,84 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Eigenständigkeitserklärung}{}{paragraph*.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.}Einleitung}{2}{section.1}
+\contentsline {section}{\numberline {1.}Einleitung}{1}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.}Eingrenzung}{2}{section.2}
+\contentsline {section}{\numberline {2.}Eingrenzung}{1}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.}Theoretische Grundlagen}{2}{section.3}
+\contentsline {section}{\numberline {3.}Theoretische Grundlagen}{1}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.}Allgemeine Grundlagen des Maschinellen Lernens}{2}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1.}Allgemeine Grundlagen des Maschinellen Lernens}{1}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.1.}Arten von Verfahren des Maschinellen Lernens}{2}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.1.}Arten von Verfahren des Maschinellen Lernens}{1}{subsubsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.2.}Typische Probleme beim Maschinellen Lernen}{4}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.2.}Typische Probleme beim Maschinellen Lernen}{3}{subsubsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.3.}Datenvorverarbeitung für Bilddaten}{6}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.3.}Datenvorverarbeitung für Bilddaten}{5}{subsubsection.3.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.4.}Qualitätsmaße}{7}{subsubsection.3.1.4}
+\contentsline {subsubsection}{\numberline {3.1.4.}Qualitätsmaße}{6}{subsubsection.3.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.5.}Testen und Validieren}{10}{subsubsection.3.1.5}
+\contentsline {subsubsection}{\numberline {3.1.5.}Testen und Validieren}{9}{subsubsection.3.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.}Neuronale Netze}{11}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2.}Neuronale Netze}{10}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.1.}Biologische Grundlagen}{12}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.1.}Biologische Grundlagen}{11}{subsubsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.2.}Künstliche Neuronen}{12}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2.}Künstliche Neuronen}{11}{subsubsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.3.}Einschichtige Neuronale Netze}{14}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.3.}Einschichtige Neuronale Netze}{13}{subsubsection.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.4.}Gradientenabstiegsverfahren}{15}{subsubsection.3.2.4}
+\contentsline {subsubsection}{\numberline {3.2.4.}Gradientenabstiegsverfahren}{14}{subsubsection.3.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.5.}Mehrschichtige Neuronale Netze}{17}{subsubsection.3.2.5}
+\contentsline {subsubsection}{\numberline {3.2.5.}Mehrschichtige Neuronale Netze}{16}{subsubsection.3.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.6.}Backpropagation-Verfahren}{18}{subsubsection.3.2.6}
+\contentsline {subsubsection}{\numberline {3.2.6.}Backpropagation-Verfahren}{17}{subsubsection.3.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.7.}Aktivierungsfunktionen}{19}{subsubsection.3.2.7}
+\contentsline {subsubsection}{\numberline {3.2.7.}Aktivierungsfunktionen}{18}{subsubsection.3.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.8.}Regularisierungsverfahren}{20}{subsubsection.3.2.8}
+\contentsline {subsubsection}{\numberline {3.2.8.}Regularisierungsverfahren}{19}{subsubsection.3.2.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.}Konvolutionelle Neuronale Netze}{21}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3.}Konvolutionelle Neuronale Netze}{20}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.1.}Convolutional Layer}{22}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.1.}Convolutional Layer}{21}{subsubsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.2.}Pooling Layer}{25}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.2.}Pooling Layer}{24}{subsubsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.}Datensätze}{26}{section.4}
+\contentsline {section}{\numberline {4.}Datensätze}{25}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.}Sign Language MNIST Dataset}{26}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.1.}Sign Language MNIST Dataset}{25}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.}ASL Alphabet Dataset}{26}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.2.}ASL Alphabet Dataset}{25}{subsection.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.}Videodatensätze}{26}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.3.}Videodatensätze}{25}{subsection.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.}Entwicklungsprozess}{26}{section.5}
+\contentsline {section}{\numberline {5.}Entwicklungsprozess}{25}{section.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.}Datenvorverarbeitung}{26}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.1.}Datenvorverarbeitung}{25}{subsection.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.1.1.}Sign Language MNIST Dataset}{27}{subsubsection.5.1.1}
+\contentsline {subsubsection}{\numberline {5.1.1.}Sign Language MNIST Dataset}{26}{subsubsection.5.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.1.2.}ASL Alphabet Dataset}{28}{subsubsection.5.1.2}
+\contentsline {subsubsection}{\numberline {5.1.2.}ASL Alphabet Dataset}{27}{subsubsection.5.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.1.3.}DatasetParser Pakete}{29}{subsubsection.5.1.3}
+\contentsline {subsubsection}{\numberline {5.1.3.}DatasetParser Pakete}{28}{subsubsection.5.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.}Entwickelte Modelle}{30}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.2.}Entwickelte Modelle}{29}{subsection.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.1.}Grundaufbau des Modelltrainings}{30}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.1.}Grundaufbau des Modelltrainings}{29}{subsubsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.2.}Neuronale Netze}{34}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.2.}Neuronale Netze}{33}{subsubsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.3.}Konvolutionelle Neuronale Netze}{36}{subsubsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.3.}Konvolutionelle Neuronale Netze}{35}{subsubsection.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.4.}Transfer Learning mittels VGG19}{38}{subsubsection.5.2.4}
+\contentsline {subsubsection}{\numberline {5.2.4.}Transfer Learning mittels VGG19}{37}{subsubsection.5.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.}Backend der Webanwendung}{40}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.3.}Backend der Webanwendung}{39}{subsection.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.}Frontend der Webanwendung}{40}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.4.}Frontend der Webanwendung}{39}{subsection.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.}Ergebnisse der Entwicklung}{40}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.5.}Ergebnisse der Entwicklung}{39}{subsection.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.}Fazit}{40}{section.6}
+\contentsline {section}{\numberline {6.}Fazit}{39}{section.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.}Ausblick}{40}{section.7}
+\contentsline {section}{\numberline {7.}Ausblick}{39}{section.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.}Quellen}{41}{section.8}
+\contentsline {section}{\numberline {8.}Quellen}{40}{section.8}
