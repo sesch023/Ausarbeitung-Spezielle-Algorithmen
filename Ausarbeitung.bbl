@@ -447,5 +447,23 @@
     \field{month}{05}
     \field{year}{2018}
   \endentry
+
+  \entry{SIGNMNIST}{online}{}
+    \field{labeltitlesource}{title}
+    \field{title}{Sign Language MNIST}
+    \verb{url}
+    \verb https://www.kaggle.com/datamunge/sign-language-mnist
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{ASLMNIST}{online}{}
+    \field{labeltitlesource}{title}
+    \field{title}{ASL Alphabet}
+    \verb{url}
+    \verb https://www.kaggle.com/grassknoted/asl-alphabet
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
 \enddatalist
 \endinput

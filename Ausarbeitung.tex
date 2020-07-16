@@ -59,7 +59,7 @@
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 
 \lstdefinelanguage{JavaScript}{
-	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, async, await, const, window, any, as},
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, async, await, const, window, any, as, private},
 	keywordstyle=\color{blue}\bfseries,
 	ndkeywords={class, export, boolean, throw, implements, import, this},
 	ndkeywordstyle=\color{darkgray}\bfseries,
@@ -722,13 +722,11 @@ Mit der Definition der Pooling Layer sind nun die wichtigsten Grundlagen für da
 \section{Datensätze}
 Die verwendeten Datensätze stammen von der Online-Community Kaggle. Kaggle veranstaltet Data-Science Wettbewerbe und erlaubt es Datensätze zu finden und bereitzustellen. Die Erkennung von Fingeralphabeten ist ein übliches Problem der Bilderkennung, sodass diverse Datensätze zur Auswahl stehen. Im Projekt wurden zwei Datensätze genutzt die nachfolgend näher beschrieben werden.
 \subsection{Sign Language MNIST Dataset}
-Der „Sign Language MNIST“ Datensatz wurde unter Eingrenzung in Bezug auf Support Vektor Maschinen bereits kurz angesprochen. Der Datensatz war bereits aufbereitet und die Merkmale der Bilder wurden in Form von Graustufen (0-255) in eine CSV Datei geschrieben. Die CSV-Datei enthielt mit einer Klasse und 28x28 Pixeln pro Datensatz 785 Spalten. Die Buchstaben Z und J wurden nicht als Klassen hinterlegt, da diese eine gewisse Gestik benötigen die in einem Standbild nicht einzufangen ist. Durch extrahieren der Merkmale konnten die Bilder zurückgewonnen und manuell analysiert werden. Aufgefallen ist, dass die Bilder stets mit einem ruhigen und einfarbigen Hintergrund aufgenommen wurden. Insgesamt lagen in einem 80 zu 20 Verhältnis 27455 Trainingsdaten und 7172 Testdaten vor. Die geringe Anzahl an Merkmalen erlaubte ein schnelles Training, allerdings mussten für eine reale Anwendung die Bilder runterskaliert und aufbereitet werden. Trotz hoher Accuracy auf dem Testdatensatz, konnten Bilder in einer Real-Welt-Anwendung mit einer Webcam nicht zuverlässig erkannt werden. Begünstigt wurde dieses Problem vermutlich durch die geringe Informationsdichte der Bilder. Daraufhin wurde der Datensatz gewechselt. 
-%TODO: QUELLE EINFÜGEN
+Der „Sign Language MNIST“ Datensatz wurde unter Eingrenzung in Bezug auf Support Vektor Maschinen bereits kurz angesprochen. Der Datensatz war bereits aufbereitet und die Merkmale der Bilder wurden in Form von Graustufen (0-255) in eine CSV Datei geschrieben. Die CSV-Datei enthielt mit einer Klasse und 28x28 Pixeln pro Datensatz 785 Spalten. Die Buchstaben Z und J wurden nicht als Klassen hinterlegt, da diese eine gewisse Gestik benötigen die in einem Standbild nicht einzufangen ist. Durch extrahieren der Merkmale konnten die Bilder zurückgewonnen und manuell analysiert werden. Aufgefallen ist, dass die Bilder stets mit einem ruhigen und einfarbigen Hintergrund aufgenommen wurden. Insgesamt lagen in einem 80 zu 20 Verhältnis 27455 Trainingsdaten und 7172 Testdaten vor \cite{SIGNMNIST}. Die geringe Anzahl an Merkmalen erlaubte ein schnelles Training, allerdings mussten für eine reale Anwendung die Bilder runterskaliert und aufbereitet werden. Trotz hoher Accuracy auf dem Testdatensatz, konnten Bilder in einer Real-Welt-Anwendung mit einer Webcam nicht zuverlässig erkannt werden. Begünstigt wurde dieses Problem vermutlich durch die geringe Informationsdichte der Bilder. Daraufhin wurde der Datensatz gewechselt. 
 \subsection{ASL Alphabet Dataset}
-Der zweite Datensatz mit den Namen „ASL Alphabet“ hat 87000 Bilder mit Farbinformationen und 200x200 Pixeln und ist damit deutlich größer als der vorherige. Die Input-Größe, berechenbar durch Breite x Höhe x Farbinformation, ist für ein Konvolutionelles Neuronales Netz dank dem später erklärten Filtern und dem möglichen Trainieren auf einem Grafikprozessor kein Problem. Das ConvNet ist in der Lage die wichtigen Informationen selbst zu extrahieren und die unwichtigen herauszufiltern. In dem Datensatz sind zusätzlich die Klassen Space, Delete und Nothing enthalten, wobei nur letztere berücksichtigt wurde. Die Handzeichen sind durchweg vor dem gleichen Hintergrund aufgenommen, variieren aber etwas stärker in Lichtverhältnissen, Bildschärfe und Position der Hand. Außerdem ist der Hintergrund nicht einfarbig, sondern die Bilder scheinen vor einem Dachfenster aufgenommen worden zu sein. Anders als der Sign Language MNIST Datensatz sind die Bildinformationen nicht bereits in eine CSV Datei extrahiert, sondern liegen tatsächlich als Bilder vor. Die einzelnen Handzeichen sind in Ordnern mit dem Namen des jeweiligen Buchstaben organisiert. Ein Testdatensatz ist bereits vorbereitet, enthält aber lediglich ein Bild jeder Klasse, sodass dieser noch erweitert wird. Das genaue vorgehen wird unter \ref{aslpreparation} beschrieben.
-%TODO: QUELLE EINFÜGEN
+Der zweite Datensatz mit den Namen „ASL Alphabet“ hat 87000 Bilder mit Farbinformationen und 200x200 Pixeln und ist damit deutlich größer als der vorherige \cite{ASLMNIST}. Die Input-Größe, berechenbar durch Breite x Höhe x Farbinformation, ist für ein Konvolutionelles Neuronales Netz dank dem später erklärten Filtern und dem möglichen Trainieren auf einem Grafikprozessor kein Problem. Das ConvNet ist in der Lage die wichtigen Informationen selbst zu extrahieren und die unwichtigen herauszufiltern. In dem Datensatz sind zusätzlich die Klassen Space, Delete und Nothing enthalten, wobei nur letztere berücksichtigt wurde. Die Handzeichen sind durchweg vor dem gleichen Hintergrund aufgenommen, variieren aber etwas stärker in Lichtverhältnissen, Bildschärfe und Position der Hand. Außerdem ist der Hintergrund nicht einfarbig, sondern die Bilder scheinen vor einem Dachfenster aufgenommen worden zu sein. Anders als der Sign Language MNIST Datensatz sind die Bildinformationen nicht bereits in eine CSV Datei extrahiert, sondern liegen tatsächlich als Bilder vor. Die einzelnen Handzeichen sind in Ordnern mit dem Namen des jeweiligen Buchstaben organisiert. Ein Testdatensatz ist bereits vorbereitet, enthält aber lediglich ein Bild jeder Klasse, sodass dieser noch erweitert wird. Das genaue vorgehen wird unter \ref{aslpreparation} beschrieben.
 \subsection{Videodatensätze}
-%TODO: TEXT EINFÜGEN
+Videodatensätze würden erlauben Gestik und Mimik zu erkennen, was für komplexe Gebärdensprache unerlässlich ist. Dazu müsste der Stream der Webcam in Echtzeit an das Backend übertragen werden. Da Videos lediglich eine schnelle Folge von Bildern sind, könnte eine naive Idee vorsehen, die Frames einzeln durch das Netz zu schicken. Bei der Vorhersage werden die K letzten Frames betrachtet und ein Durchschnitt der Prediction gebildet. Das Label mit der passenden Wahrscheinlichkeit wird als Gesamtergebnis verwendet. Da das Projekt sich auf Standbilder des Fingeralphabets bezieht, wurde diese Möglichkeit allerdings nicht weiter untersucht.
 \section{Entwicklungsprozess}
 Da nun die genutzten Datensätze beschrieben wurden, kann mit der Dokumentation des Entwicklungsprozesses fortgefahren werden. Hier wird wie bei Maschinellen Lernen üblich sich zunächst auf die Datenvorverarbeitung konzentriert.
 \subsection{Datenvorverarbeitung}
@@ -963,27 +961,42 @@ model_urls = {
 }
 
 # Infos der Modelle mit URLs zurückgeben
-api.add_resource(ModelInfo, "/model_info", endpoint="model_info", resource_class_kwargs={"model_urls": model_urls})
+api.add_resource(ModelInfo, "/model_info", endpoint="model_info", 
+	resource_class_kwargs={"model_urls": model_urls})
 
 # Eigenes Modell mit Eingangsgröße 150x150 und 5 CNN Layern.
-api.add_resource(SignLanguageCNN, model_urls["150x150_5_Layer_CNN.hdf5"], endpoint="cnn_5_150_150",
-resource_class_kwargs={"document_outputs": False,
-"target_shape": (150, 150),
-"model_config": app.config["MODELS"]["150x150_5_Layer_CNN.hdf5"]})
+api.add_resource(SignLanguageCNN, 
+	model_urls["150x150_5_Layer_CNN.hdf5"], 
+	endpoint="cnn_5_150_150",
+	resource_class_kwargs={
+		"document_outputs": False,
+		"target_shape": (150, 150),
+		"model_config": 
+			app.config["MODELS"]["150x150_5_Layer_CNN.hdf5"]})
 
 # VGG19 mit Eingangsgröße 224x224 umtrainiert.
-api.add_resource(SignLanguageCNN, model_urls["224x224_VGG19_CNN.hdf5"], endpoint="vgg19_224_224",
-resource_class_kwargs={"document_outputs": False,
-"to_grayscale": False,
-"target_shape": (224, 224),
-"model_config": app.config["MODELS"]["224x224_VGG19_CNN.hdf5"]})
+api.add_resource(SignLanguageCNN, 
+	model_urls["224x224_VGG19_CNN.hdf5"], 
+	endpoint="vgg19_224_224",
+	resource_class_kwargs={
+		"document_outputs": False,
+		"to_grayscale": False,
+		"target_shape": (224, 224),
+		"model_config": 
+			app.config["MODELS"]["224x224_VGG19_CNN.hdf5"]})
 
-# VGG19 mit Eingangsgröße 224x224 umtrainiert und mit VGG19_Preprozess der Bilder.
-api.add_resource(SignLanguageCNN, model_urls["224x224_VGG19_CNN_v2.hdf5"], "/default", endpoint="vgg19_224_224_v2",
-resource_class_kwargs={"document_outputs": False,
-"to_grayscale": False,
-"target_shape": (224, 224),
-"model_config": app.config["MODELS"]["224x224_VGG19_CNN_v2.hdf5"]})
+# VGG19 mit Eingangsgröße 224x224 umtrainiert 
+# und mit VGG19_Preprozess der Bilder.
+api.add_resource(SignLanguageCNN, 
+	model_urls["224x224_VGG19_CNN_v2.hdf5"], 
+	"/default", 
+	endpoint="vgg19_224_224_v2",
+	resource_class_kwargs={
+		"document_outputs": False,
+		"to_grayscale": False,
+		"target_shape": (224, 224),
+		"model_config": 
+			app.config["MODELS"]["224x224_VGG19_CNN_v2.hdf5"]})
 \end{lstlisting}
 Der oberste Endpunkt \lstinline[language=pythoninline]|/model_info| ist in der Datei \lstinline[language=pythoninline]|ModelInfo.py| ausprogrammiert und erlaubt es per HTTP-GET die hinterlegten Modelle und die dazugehörige URL abzufragen. So kann ein Client zwischen den Modellen hin und her wechseln. Gerade für das Testen im Real-Betrieb war das wichtig und die Unterschiedlichen Leistungen konnten leichter herausgearbeitet werden. Das Backend wurde unter \url{https://jupiter.fh-swf.de/sign-language} gehosted, sodass für die Abfrage der Modelle \url{https://jupiter.fh-swf.de/sign-language/model_info} per HTTP-GET angesprochen werden muss.
 \begin{lstlisting}[language=python,firstnumber=4,caption={Abfrage der möglichen Modelle.},label=lst:request_models]
@@ -1025,8 +1038,11 @@ color_dim = 1
 else:
 image_pil = image_pil.convert("RGB")
 
-# Image in ein Tensorflow Array, Reshape es in 4 Dimensionen (BatchSize (1), Breite, Höhe, Farben)
-image_tf = img_to_array(image_pil).reshape((1, self.target_shape[0], self.target_shape[1], color_dim))
+# Image in ein Tensorflow Array, Reshape es in 4
+# Dimensionen (BatchSize (1), Breite, Höhe, Farben)
+image_tf = img_to_array(image_pil).reshape(
+	(1, self.target_shape[0], self.target_shape[1], color_dim)
+	)
 # Prediction für das Bild, mit der genutzten Config.
 prediction = self.model_config["MODEL"].predict(image_tf).tolist()
 
@@ -1044,45 +1060,47 @@ Das webbasierte Frontend dient als „Real-Welt-Anwendung“ um die Modelle auß
 Auf der Seite für die Zeichenerkennung im Frontend kann mit dem Leerzeichen oder einem Klick auf „Start Prediction“ die Erkennung über eine Webcam gestartet werden. Der Zugriff auf die Webcam muss dabei aktiv vom Benutzer erlaubt werden. Frontendseitig wird mithilfe von Googles MediaPipe Hands die Hand im Bild in Echtzeit getracked. MediaPipe Hands besteht aus mehreren Modellen die über eine ML-Pipeline zusammenabreiten. Das erste Modell operiert auf dem gesamten Bild und findet die Handfläche. Das zweite Modell nutzt den Ausschnitt der gefundenen Handfläche und markiert 21 markante Punkte der Hand. MediaPipe Hands konnte mithilfe von TensorFlow.js Frontendseitig eingebunden und angesprochen werden. Das laden des Handtracking-Modells wird in der Datei \lstinline[language=pythoninline]|main.ts| durchgeführt und automatisch an das globale Window-Objekt gehangen.
 \begin{lstlisting}[language=javascript,firstnumber=16,caption={Laden der frontendseitigen MediaPipe Hands Modelle.},label=lst:loading_mediapipe_hands_models]
 (async () => {
-const model = await handpose.load();
-(window as any).tensorflowModel = model;
-platformBrowserDynamic().bootstrapModule(AppModule)
-.catch(err => console.error(err));
+	const model = await handpose.load();
+	(window as any).tensorflowModel = model;
+	platformBrowserDynamic().bootstrapModule(AppModule)
+		.catch(err => console.error(err));
 })();
 \end{lstlisting}
 Sobald das Modell Frontendseitig registriert wurde, wird die Angular Applikation gestartet. Da das Frontend sich die Bibliothek lediglich zu Nutze macht und in das trainieren in ein Handtracking-Modell keine Eigenleistung investiert wurde, wird technisch nicht tiefer auf MediaPipe Hands eingegangen. Das Bild der Webcam wird normalerweise in einem HTML5 Video-Element dem Benutzer angezeigt. Aber da auf so ein Element weder gezeichnet noch Einzelbilder extrahiert werden können, wurde für die Ausgabe ein Canvas-Element genutzt. Die Hauptaufgabe der Frontendseitigen Handerkennung passiert in der Datei \lstinline[language=pythoninline]|webcam.component.ts| unter \lstinline[language=pythoninline]|src/app/sign-prediction/webcam/| in der Methode \lstinline[language=pythoninline]|estimateHands|. Hier wird nach auslesen der Höhe und Breite des Video- und Canvas-Elements das Bild der Webcam in das Canvas übertragen. Dazu wird der Rendering-Context des Canvas-Elements genutzt und das Video-Element zuvor ausgeblendet. Über die zuvor angesprochene globale Variable kann auf das Handtracking-Modell zugegriffen werden und das aktuelle Webcam-Bild übergeben werden. Sollte eine Hand gefunden werden, werden die Koordinaten extrahiert und in einen mit RxJS erstellten Stream übergeben.
 \begin{lstlisting}[language=javascript,firstnumber=124,caption={Erkennen einer Hand mit MediaPipe Hands.},label=lst:estimate_hands]
 private async estimateHands() {
 
-const videoWidth = this.video.nativeElement.videoWidth;
-const videoHeight = this.video.nativeElement.videoHeight;
-const canvasWidth = this.overlay.nativeElement.width;
-const canvasHeight = this.overlay.nativeElement.height;
-
-this.renderingContext.drawImage(
-this.video.nativeElement, 0, 0, videoWidth, videoHeight, 0, 0, canvasWidth,
-canvasHeight);
-
-if (this.isPredictionActive) {
-const model: HandPose = (window as any).tensorflowModel;
-const hands: Array<any> = await model.estimateHands(this.video.nativeElement);
-const boundingBox = hands.length > 0 ?
-{ topLeft: hands[0].boundingBox.topLeft, bottomRight: hands[0].boundingBox.bottomRight } :
-{ topLeft: ['0', '0'], bottomRight: ['0', '0'] };
-
-
-this.croppedRenderingContext.clearRect(0, 0,
-this.croppedCanvas?.nativeElement.width,
-this.croppedCanvas?.nativeElement.height);
-
-this.ngZone.run(() =>
-this.boundingBoxSubject.next(boundingBox)
-);
-}
-
-if (this.isPredictionActive) {
-requestAnimationFrame(this.estimateHands.bind(this));
-}
+	const videoWidth = this.video.nativeElement.videoWidth;
+	const videoHeight = this.video.nativeElement.videoHeight;
+	const canvasWidth = this.overlay.nativeElement.width;
+	const canvasHeight = this.overlay.nativeElement.height;
+	
+	this.renderingContext.drawImage(
+		this.video.nativeElement, 0, 0, videoWidth, 
+			videoHeight, 0, 0, canvasWidth,
+			canvasHeight
+	);
+	
+	if (this.isPredictionActive) {
+		const model: HandPose = (window as any).tensorflowModel;
+		const hands: Array<any> = 
+			await model.estimateHands(this.video.nativeElement);
+		const boundingBox = hands.length > 0 ?
+			{ topLeft: hands[0].boundingBox.topLeft, 
+			  bottomRight: hands[0].boundingBox.bottomRight } :
+			{ topLeft: ['0', '0'], bottomRight: ['0', '0'] };
+	
+	
+		this.croppedRenderingContext.clearRect(0, 0,
+			this.croppedCanvas?.nativeElement.width,
+			this.croppedCanvas?.nativeElement.height);
+			
+		this.ngZone.run(() =>
+			this.boundingBoxSubject.next(boundingBox)
+		);
+	
+		requestAnimationFrame(this.estimateHands.bind(this));
+	}
 }
 \end{lstlisting}
 Mithilfe der \lstinline[language=pythoninline]|requestAnimationFrame| Methode, wird pro Frame die Methode \lstinline[language=pythoninline]|estimateHands| erneut aufgerufen, bis der Benutzer abbricht. Das Handtracking wird mithilfe von WebGL auf der Grafikkarte ausgeführt, sodass es ohne Grafikkarte zu FPS Einbrüchen kommen kann. Der RxJS Stream kümmert sich nachgelagert um das einzeichnen einer roten Box um die Hand des Benutzers.
@@ -1115,7 +1133,7 @@ Der genutzte ASL Alphabet Datensatz hat mit 87000 Bildern bereits eine angemesse
 \subsection{Ausbau des Traingsdatensatzes}
 Alternativ zur Data Augmentation könnte der Datensatz durch Real-Daten erweitert werden. Das Frontend sendet sämtliche Bilder Base 64 kodiert an das Python Backend. Diese Bilder könnten gespeichert und manuell klassifiziert werden. Auf lange Sicht könnte der bestehende Datensatz sogar ersetzt werden um das Ergebnis an den Bildern der Webcam anzupassen und zu verbessern.
 \subsection{Perfomance des Frontends}
-Das Frontend arbeitet selbst mit einem großen Modell mithilfe von TensorFlow.js, um die Hand in dem Bild der Webcam zu finden. Dies erlaubt es dem Benutzer Feedback zu geben und die Hand bereits Frontendseitig auszuschneiden. Das Modell wird mit WebGL direkt auf der Grafikkarte ausgeführt und wird mit dem Start der Applikation geladen. Insgesamt werden ca. 15MB übertragen, welche für eine durchschnittliche Interleitung keine Probleme darstellen. Dennoch könnte die Startzeit der Applikation mit geringerer Dateigröße verringert werden. Außerdem ist eine dedizierte Einsteiger-Grafikkarte vorauszusetzen um ein flüssiges Arbeiten zu garantieren. Mit dem Verzicht auf das Handtracking, könnte das Modell wegfallen und die Aufbereitung aus dem Frontend in das Backend übertragen werden. So wäre ein flüssiges Arbeiten mit dem Frontend auf nahezu jeder Hardware möglich.
+Das Frontend arbeitet selbst mit einem großen Modell mithilfe von TensorFlow.js, um die Hand in dem Bild der Webcam zu finden. Dies erlaubt es dem Benutzer Feedback zu geben und die Hand bereits Frontendseitig auszuschneiden. Das Modell wird mit WebGL direkt auf der Grafikkarte ausgeführt und wird mit dem Start der Applikation geladen. Insgesamt werden ca. 15MB übertragen, welche für eine durchschnittliche Internetleitung keine Probleme darstellen. Dennoch könnte die Startzeit der Applikation mit geringerer Dateigröße verringert werden. Außerdem ist eine dedizierte Einsteiger-Grafikkarte vorauszusetzen um ein flüssiges Arbeiten zu garantieren. Mit dem Verzicht auf das Handtracking, könnte das Modell wegfallen und die Aufbereitung aus dem Frontend in das Backend übertragen werden. So wäre ein flüssiges Arbeiten mit dem Frontend auf nahezu jeder Hardware möglich.
 \subsection{Textausgabe im Frontend}
 Momentan wird im Frontend der erkannte Buchstabe hervorgehoben. Das trainierte Modell bietet zusätzlich noch die Klassen Space und Delete, die dazu genutzt werden könnten eine sinnvolle Textausgabe auf Basis der Vorhersagen zu realisieren. 
 \subsection{Intervall der Handzeichenerkennung}
