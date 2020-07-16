@@ -17,6 +17,18 @@
 \endgroup
 
 \datalist[entry]{none/global//global/global}
+  \entry{FINGERALPHABET}{online}{}
+    \field{labeltitlesource}{title}
+    \field{title}{Abbildung des Fingeralphabets}
+    \verb{url}
+    \verb https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Asl_alphabe
+    \verb t_gallaudet.svg/380px-Asl_alphabet_gallaudet.svg.png
+    \endverb
+    \field{urlday}{16}
+    \field{urlmonth}{07}
+    \field{urlyear}{2020}
+  \endentry
+
   \entry{MACHINE_LEARNING}{book}{}
     \name{author}{1}{}{%
       {{hash=GA}{%

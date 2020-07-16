@@ -54,6 +54,41 @@
 \definecolor{red_fp}{RGB}{255, 176, 176}
 \definecolor{red_fn}{RGB}{255, 210, 171}
 
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, async, await, const, window, any, as},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstset{
+	language=JavaScript,
+	backgroundcolor=\color{lightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b
+}
+
 \lstset{
 	breaklines=true,
 	extendedchars=true,
@@ -275,8 +310,8 @@
 	{\huge\bfseries Automatische Auswertung von Gebärdensprache mittels Maschinellen Lernens.\par}
 	\vspace{1cm}
 	{\Large\itshape Mario Gruda\par}
-	Matrikelnummer: 10053783\par
-	E-Mail: schmidt.sebastian2@fh-swf.de\par
+	Matrikelnummer: 10053795\par
+	E-Mail: gruda.mario@fh-swf.de\par
 	\vspace{1cm}
 	{\Large\itshape Sebastian Schmidt\par}
 	Matrikelnummer: 10053783\par
@@ -315,7 +350,18 @@ Arbeit an keiner anderen Stelle zur Abgabe vorgelegt.
 \ihead[]{\headmark}
 \setcounter{equation}{0}
 \section{Einleitung}
+Im Rahmen der Veranstaltung Spezielle Algorithmen des Masterstudiengangs für angewandte Informatik der Fachhochschule Südwestfalen, soll zum Abschluss ein Projekt im Bereich Machine Learning durchgeführt werden. Das nachfolgende Dokument beschäftigt sich mit der Erkennung von Buchstaben die mithilfe des amerikanischen Fingeralphabets gezeigt wurden. Ebenso wie in sprachlichen Übersetzungen, wird im Bereich der Erkennung von Gebärden und des Fingeralphabets viel geforscht, um Sprachbarrieren zu überwinden. Anders als in sprachlichen Übersetzungen steht keine Textuelle Analyse in Bezug auf Grammatik und Semantik im Vordergrund, sondern die Analyse von Bildmaterial.  Das Dokument ist in einen theoretischen und einen praktischen Teil gegliedert. Der theoretische Teil beschäftigt sich vorerst mit den Grundlagen des maschinellen Lernens, ehe die Algorithmen und die genutzten Modelle näher vorgestellt werden. Der praktische Teil beschreibt die Integrierung der Modelle mit einem webbasierten Frontend um diese in einer realen Umgebung testen zu können. Eventuelle Optimierungen für den praktischen Teil werden nur kurz angesprochen, aber nicht in aller tiefe implementiert und getestet. Das Hauptaugenmerk wird aufgrund des Umfangs auf die Theorie gelegt. Abschließend werden aufgetretene Probleme und ein Ausblick näher beleuchtet.
+\section{Fingeralphabet}
+\label{fingeralphabet}
+Das internationale Einhand-Fingeralphabet erlaubt es die lateinischen Buchstaben ohne Unterscheidung der Groß- und Kleinschreibung mithilfe von Handzeichen zum Ausdruck zu bringen. Jedes Zeichen kann mit nur einer Hand nachgebildet werden, wobei die Handzeichen den Kleinbuchstaben nachempfunden sind. So ist beispielsweise das „a“ eine geschlossene Faust mit angelegtem Daumen. Das Fingeralphabet wird üblicherweise mit der Dominanten Hand gebildet und wird vor allem genutzt um die Gebärdensprache zu ergänzen, sollte es noch keine Gebärde geben. Alternativ kann mit dem Fingeralphabet ein Wort besonders betont werden. Anders als die Gebärdensprache, wird das Fingeralphabet nicht genutzt, um eine ganze Unterhaltung zu führen.  Je nach Land unterscheiden sich die Handzeichen in Form und Menge. So musste das deutsche Fingeralphabet um Umlaute ergänzt werden. Außerdem unterscheiden sich beispielsweise die Buchstaben M und N zwischen dem deutschen und amerikanischen Alphabet. Da das Fingeralphabet genutzt wird, um die Gebärdensprache zu ergänzen, wird in diesem Projekt mit dem Begriff Gebärdensprache das Fingeralphabet bezeichnet.
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=1.0\textwidth]{fingeralphabet}
+	\caption[Fingeralphabet]{Darstellung des Fingeralphabets \cite{FINGERALPHABET}.}
+	\label{fig:fingeralphabet}
+\end{figure}
 \section{Eingrenzung}
+Das Ergebnis dieses Projekts soll eine schriftliche Ausarbeitung und Quellcode für das Modell-Training sowie für ein Python Backend und Angular Frontend sein. Die Zeichenerkennung wurde auf das unter Abbildung \ref{fig:fingeralphabet} dargestellte amerikanische Fingeralphabet begrenzt. Umlaute oder Zahlen werden also nicht erkannt. Die Buchstaben J und Z sind zwar in einem der verwendeten Datensätze enthalten, erfordern aber eine gewisse Gestik, sodass die Erkennung in Standbildern erschwert ist. Da das hier vorgestellte Problem auf die Erkennung von Bildern zurückzuführen ist, wird in diesem Projekt auf Konvolutionelle Neuronale Netze gesetzt, welche im ImageNet Large Scale Visual Recognition Challenge (ILSVRC) die besten Ergebnisse erzielen. Vor Projektvergabe wurde auf einem kleinen Datensatz mit 28x28 Merkmalen eine Support Vektor Maschine mit RBF Kernel trainiert. Die erreichte Vorhersagegenauigkeit von ca. 79\% auf dem Testdatensatz wurde mit einem CNN aber schnell überboten. Zusätzlich wurde ein einfaches Neuronales Netz antrainiert, welches unter \ref{nntraining} beschrieben wird. Auch hier wurden Tests und Optimierungen aufgrund von ernüchternden Ergebnissen zügig abgebrochen und dienen in der Ausarbeitung nur als Vergleichswert. Im Rahmen der Vorlesung wurden unteranderem die Bibliotheken ScikitLearn, NumPy und Keras bearbeitet, sodass sich in der Projektarbeit größtenteils darauf beschränkt wird.  Die Nutzung der trainierten Modelle zielt darauf ab, Bilder einer Webcam in einem Intervall an ein Python Backend zu senden. Im Backend werden die bereits trainierten Modelle hinterlegt, welche dann eine Voraussage für das gesendete Bild treffen. Das Ergebnis entspricht einer Klassifikation, wobei jeder mögliche Buchstabe einer Klasse zugeordnet ist. Das Frontend soll als Antwort die jeweiligen Wahrscheinlichkeiten und den wahrscheinlichsten Buchstaben als separates Property bekommen welcher entsprechend im Frontend visualisiert wird. Das Python Backend gibt über einen Endpunkt die hinterlegten Modelle aus, sodass diese im Frontend jederzeit gewechselt werden können. Als Schnittstelle zwischen Frontend und Backend dienen einfache HTTP-Anfragen, sodass das Frontend ohne Probleme ausgetauscht oder durch ein weiteres ergänzt werden kann.
 \section{Theoretische Grundlagen}
 In diesem Abschnitt sollen theoretische Grundlagen des Maschinellen Lernens vorgestellt werden. Es wird zunächst auf allgemeine Grundlagen eingegangen, um im Folgenden Neuronale Netze und Konvolutionelle Neuronale Netze zu betrachten.
 \subsection{Allgemeine Grundlagen des Maschinellen Lernens}
@@ -674,9 +720,15 @@ Pooling Layer werden genutzt um die Größe von Convolutional Layern zu verringe
 \vspace*{-5mm}
 Mit der Definition der Pooling Layer sind nun die wichtigsten Grundlagen für das Maschinelle Lernen mit Bildern gesetzt. Es kann also nun mit dem praktischeren Aspekten begonnen werden.
 \section{Datensätze}
+Die verwendeten Datensätze stammen von der Online-Community Kaggle. Kaggle veranstaltet Data-Science Wettbewerbe und erlaubt es Datensätze zu finden und bereitzustellen. Die Erkennung von Fingeralphabeten ist ein übliches Problem der Bilderkennung, sodass diverse Datensätze zur Auswahl stehen. Im Projekt wurden zwei Datensätze genutzt die nachfolgend näher beschrieben werden.
 \subsection{Sign Language MNIST Dataset}
+Der „Sign Language MNIST“ Datensatz wurde unter Eingrenzung in Bezug auf Support Vektor Maschinen bereits kurz angesprochen. Der Datensatz war bereits aufbereitet und die Merkmale der Bilder wurden in Form von Graustufen (0-255) in eine CSV Datei geschrieben. Die CSV-Datei enthielt mit einer Klasse und 28x28 Pixeln pro Datensatz 785 Spalten. Die Buchstaben Z und J wurden nicht als Klassen hinterlegt, da diese eine gewisse Gestik benötigen die in einem Standbild nicht einzufangen ist. Durch extrahieren der Merkmale konnten die Bilder zurückgewonnen und manuell analysiert werden. Aufgefallen ist, dass die Bilder stets mit einem ruhigen und einfarbigen Hintergrund aufgenommen wurden. Insgesamt lagen in einem 80 zu 20 Verhältnis 27455 Trainingsdaten und 7172 Testdaten vor. Die geringe Anzahl an Merkmalen erlaubte ein schnelles Training, allerdings mussten für eine reale Anwendung die Bilder runterskaliert und aufbereitet werden. Trotz hoher Accuracy auf dem Testdatensatz, konnten Bilder in einer Real-Welt-Anwendung mit einer Webcam nicht zuverlässig erkannt werden. Begünstigt wurde dieses Problem vermutlich durch die geringe Informationsdichte der Bilder. Daraufhin wurde der Datensatz gewechselt. 
+%TODO: QUELLE EINFÜGEN
 \subsection{ASL Alphabet Dataset}
+Der zweite Datensatz mit den Namen „ASL Alphabet“ hat 87000 Bilder mit Farbinformationen und 200x200 Pixeln und ist damit deutlich größer als der vorherige. Die Input-Größe, berechenbar durch Breite x Höhe x Farbinformation, ist für ein Konvolutionelles Neuronales Netz dank dem später erklärten Filtern und dem möglichen Trainieren auf einem Grafikprozessor kein Problem. Das ConvNet ist in der Lage die wichtigen Informationen selbst zu extrahieren und die unwichtigen herauszufiltern. In dem Datensatz sind zusätzlich die Klassen Space, Delete und Nothing enthalten, wobei nur letztere berücksichtigt wurde. Die Handzeichen sind durchweg vor dem gleichen Hintergrund aufgenommen, variieren aber etwas stärker in Lichtverhältnissen, Bildschärfe und Position der Hand. Außerdem ist der Hintergrund nicht einfarbig, sondern die Bilder scheinen vor einem Dachfenster aufgenommen worden zu sein. Anders als der Sign Language MNIST Datensatz sind die Bildinformationen nicht bereits in eine CSV Datei extrahiert, sondern liegen tatsächlich als Bilder vor. Die einzelnen Handzeichen sind in Ordnern mit dem Namen des jeweiligen Buchstaben organisiert. Ein Testdatensatz ist bereits vorbereitet, enthält aber lediglich ein Bild jeder Klasse, sodass dieser noch erweitert wird. Das genaue vorgehen wird unter \ref{aslpreparation} beschrieben.
+%TODO: QUELLE EINFÜGEN
 \subsection{Videodatensätze}
+%TODO: TEXT EINFÜGEN
 \section{Entwicklungsprozess}
 Da nun die genutzten Datensätze beschrieben wurden, kann mit der Dokumentation des Entwicklungsprozesses fortgefahren werden. Hier wird wie bei Maschinellen Lernen üblich sich zunächst auf die Datenvorverarbeitung konzentriert.
 \subsection{Datenvorverarbeitung}
@@ -711,6 +763,7 @@ def to_image_at_dir(target_dir, row_data, image_name):
 \end{lstlisting}
 Diese Funktion ist sehr einfach und nimmt lediglich einen Zielordner, die Daten einer Zeile des Datensatzes sowie ein Name des Bildes (zum Beispiel eine Bildnummer) an. Dann werden in Zeile 45 und 47 Label und Daten getrennt. Eine Umwandlung in Integer der Daten wird ebenfalls über eine Map-Funtkion vorgenommen. Es folgt in Zeile 50 bis 52 eine Umwandlung in ein 28x28 Numpy-Array mit Datenpunkten als 8-Bit Unsigned Integer (uint8). Zuletzt werden die Daten des Numpy-Arrays lediglich mit der bekannten Bildverarbeitungsbibliothek für Python Pillow in ein Bild umgewandelt und anschließend als PNG in RGB abgespeichert. Es wurde sich hier für PNGs statt für Grauwertbilder entschieden, da so ein problemloses Verwenden von \lstinline[language=pythoninline]|image_dataset_from_directory| möglich wird.
 \subsubsection{ASL Alphabet Dataset}
+\label{aslpreparation}
 Der ASL Alphabet Dataset ist vom Aufbau deutlich einfacher zu verarbeiten, da hier die Bilder bereits in passende Subordner des Trainingsdatensatzes sortiert sind. Die Testdaten benötigen allerdings Vorverarbeitung, da diese pro Zeichen der ASL nur ein Bild beinhalten. Dies ist nicht hinreichend für Testdaten. In der Vorverarbeitung wird also eine bestimmte Anzahl zufälliger Bilder pro ASL Zeichen aus den Trainingsdaten ausgewählt und in das passend erstellte Verzeichnis für die Testdaten umkopiert.
 \\\\
 Dies funktioniert im Kern über folgende Funktion, welche jeden Ordner für ein ASL Zeichen durchläuft und mittels der Bibliothek \lstinline[language=pythoninline]|glob| alle Dateien aus diesen ließt. Dann werden mit \lstinline[language=pythoninline]|random.sample| eine vorher definierte zufällige Anzahl von Samples (in der Praxis 300) ausgewählt und in das Zielverzeichnis des Testordners für dieses ASL Zeichen umkopiert.
@@ -845,6 +898,7 @@ evaluate(numpy.argmax(pred, axis=1),
 \end{lstlisting}
 Abschließend sei erwähnt, dass die Auswertungsergebnisse der Testdaten nur in Betracht gezogen wurden, wenn bereits einige andere Modelle mit Validierungsdaten getestet wurden. Ein anderes Auswertungsverhalten würde die in Kapitel \ref{validation} genannten Grundsätze verletzen.
 \subsubsection{Neuronale Netze}
+\label{nntraining}
 Zunächst wurde der Einsatz einfacher Neuronaler Netze erprobt. Da diese grade bei großen Bildern in der Regel von CNNs abgelöst wurden, wurden hier nur wenige Tests ausgeführt. Selbst bei großen Modellen und ohne vorliegenden Overfitting Effekten, konnte maximal eine Vorhersagegenauigkeit von 80\% erreicht werden. Grundsätzlich wurde versucht in der Eingabeschicht in etwa ein Neuron pro Bildpunkt zu nutzen. Diese sollten dann in jedem Layer mit einer abnehmenden Schichtgröße immer weiter heruntergerechnet werden, bis es sinnvoll wurde die Ausgabeschicht anzusetzen. Weiterhin wurden alle versteckten Schichten von einem Dropout und einer Batch Normalisierung gefolgt. Auf dieser Basis wurden viele Netzstrukturen erprobt. Eines dieser Modelle, welches für das Sign Language MNIST Dataset verwendet wurde, ist in folgender Abbildung zu erkennen: 
 \begin{figure}[H]
 	\centering
@@ -897,10 +951,175 @@ Es ist zu beachten, dass sich Filter der selben Größe mehrfach wiederholen, so
 \end{figure}
 \vspace*{-5mm}
 \subsection{Backend der Webanwendung}
+Das Backend es Projekts wurde mit Python implementiert um die ebenfalls mit Python trainierten Modelle einfach einbinden zu können. Die Programmiersprache Python wurde um die Bibliothek Flask ergänzt, welche erlaubt es mit wenig Aufwand HTTP Endpunkte zur Verfügung zu stellen. Das Backend dient dazu die trainierten Modelle für die Erkennung des Fingeralphabets über das Netzwerkprotokoll HTTP und die angesprochenen Endpunkte durch beliebige Clients nutzbar zu machen. Das in diesem Projekt implementierte Frontend nutzt die HTTP-Schnittstelle des Backends und kann also durch beliebige andere Clients aus dritter Hand ersetzt werden. Um Sicherzustellen, dass der Zugriff von externen Domains möglich ist, wird über Cross-Origin Ressource Sharing die Same-Origin Policy aufgeweicht. Die Same-Origin Policy wird von Browsern implementiert und schränkt den Zugriff auf eine Domain ein, sodass dieser nur von der gleichen Domain mit dem gleichen Port erfolgen kann.
+\\\\
+Einsprungspunkt des Python Backends ist die Datei \lstinline[language=pythoninline]|__init__.py|, welche Flask initialisiert und die durch Keras gespeicherten Modelle in eine globale Variable lädt. Genutzt wird dazu die Funktion \lstinline[language=pythoninline]|load_model| aus dem Import \lstinline[language=pythoninline]|tensorflow.keras.models| und das bewährte Dateiformat HDF5 (Hierarchical Data Format), welches auf die Speicherung großer Datenmengen in wissenschaftlichen Anwendungen zugeschnitten ist. Die geladenen Modelle werden in der Datei \lstinline[language=pythoninline]|services.py| als unterschiedliche HTTP-Endpunkte mit auf das Modell angepasste Parameter registriert. So muss beispielsweise je nach Input-Layer der Modelle das Bild eine gewisse Form aufweisen und die „Target-Shape“ wird so mit dem Modell hart verzahnt. 
+\begin{lstlisting}[language=python,firstnumber=6,caption={Anlegen der HTTP-Endpunkte.},label=lst:add_http_endpoints]
+# Gültige Urls für Modelle
+model_urls = {
+"150x150_5_Layer_CNN.hdf5": "/cnn_5_150_150",
+"224x224_VGG19_CNN.hdf5": "/vgg19_224_224",
+"224x224_VGG19_CNN_v2.hdf5": "/vgg19_224_224_v2"
+}
+
+# Infos der Modelle mit URLs zurückgeben
+api.add_resource(ModelInfo, "/model_info", endpoint="model_info", resource_class_kwargs={"model_urls": model_urls})
+
+# Eigenes Modell mit Eingangsgröße 150x150 und 5 CNN Layern.
+api.add_resource(SignLanguageCNN, model_urls["150x150_5_Layer_CNN.hdf5"], endpoint="cnn_5_150_150",
+resource_class_kwargs={"document_outputs": False,
+"target_shape": (150, 150),
+"model_config": app.config["MODELS"]["150x150_5_Layer_CNN.hdf5"]})
+
+# VGG19 mit Eingangsgröße 224x224 umtrainiert.
+api.add_resource(SignLanguageCNN, model_urls["224x224_VGG19_CNN.hdf5"], endpoint="vgg19_224_224",
+resource_class_kwargs={"document_outputs": False,
+"to_grayscale": False,
+"target_shape": (224, 224),
+"model_config": app.config["MODELS"]["224x224_VGG19_CNN.hdf5"]})
+
+# VGG19 mit Eingangsgröße 224x224 umtrainiert und mit VGG19_Preprozess der Bilder.
+api.add_resource(SignLanguageCNN, model_urls["224x224_VGG19_CNN_v2.hdf5"], "/default", endpoint="vgg19_224_224_v2",
+resource_class_kwargs={"document_outputs": False,
+"to_grayscale": False,
+"target_shape": (224, 224),
+"model_config": app.config["MODELS"]["224x224_VGG19_CNN_v2.hdf5"]})
+\end{lstlisting}
+Der oberste Endpunkt \lstinline[language=pythoninline]|/model_info| ist in der Datei \lstinline[language=pythoninline]|ModelInfo.py| ausprogrammiert und erlaubt es per HTTP-GET die hinterlegten Modelle und die dazugehörige URL abzufragen. So kann ein Client zwischen den Modellen hin und her wechseln. Gerade für das Testen im Real-Betrieb war das wichtig und die Unterschiedlichen Leistungen konnten leichter herausgearbeitet werden. Das Backend wurde unter \url{https://jupiter.fh-swf.de/sign-language} gehosted, sodass für die Abfrage der Modelle \url{https://jupiter.fh-swf.de/sign-language/model_info} per HTTP-GET angesprochen werden muss.
+\begin{lstlisting}[language=python,firstnumber=4,caption={Abfrage der möglichen Modelle.},label=lst:request_models]
+class ModelInfo(Resource):
+"""
+Resource, die URL Infos zu den Modellen zurückgibt.
+"""
+def __init__(self, model_urls):
+"""
+Resource, die URL Infos zu den Modellen zurückgibt.
+:param model_urls: URL Infos, die zurückgegeben werden.
+"""
+self.model_urls = model_urls
+
+def get(self):
+"""
+Gibt die Model Infos mittels get-Request zurück.
+"""
+return self.model_urls, 200
+\end{lstlisting}
+Der Hauptendpunkt ist in der Klasse \lstinline[language=pythoninline]|SignLanguageCNN| in der Datei \lstinline[language=pythoninline]|SignLanguageCNN.py|implementiert. Dieser erlaubt es per HTTP-POST ein Bild an das Backend zu senden, welches je nach URL (Siehe zwei Bilder drüber) durch ein unterschiedliches Netz geschoben wird. Als Parameter dienen \lstinline[language=pythoninline]|image| und \lstinline[language=pythoninline]|image_base_64|. Der Parameter \lstinline[language=pythoninline]|image_base_64| wurde eigens für das Frontend hinzugefügt, da die Bildextraktion aus einem HTML5 Canvas lediglich Base 64 kodiert gelingt. Je nach Modell ist eine Auswertung der Farbe nicht möglich, sodass das Bild nach der Anpassung der Größe auf den Input Layer noch in Graustufen umgewandelt wird.
+\begin{lstlisting}[language=python,firstnumber=44,caption={Verarbeitung der Bilder im HTTP-Endpunkt.},label=lst:signlanguage_prediction]
+# Image per FileStorage im Request
+if args.image:
+image = args.image
+# Image per Base64 in Post
+else:
+image = BytesIO(base64.b64decode(args.image_base_64))
+
+# Öffne das Bild und resize es.
+image_pil = Image.open(image).resize(self.target_shape)
+color_dim = 3
+
+# Wenn Grauwert ausgewertet
+if self.to_grayscale:
+image_pil = image_pil.convert("L")
+color_dim = 1
+# Wenn RGB ausgewertet
+else:
+image_pil = image_pil.convert("RGB")
+
+# Image in ein Tensorflow Array, Reshape es in 4 Dimensionen (BatchSize (1), Breite, Höhe, Farben)
+image_tf = img_to_array(image_pil).reshape((1, self.target_shape[0], self.target_shape[1], color_dim))
+# Prediction für das Bild, mit der genutzten Config.
+prediction = self.model_config["MODEL"].predict(image_tf).tolist()
+
+\end{lstlisting}
+Das Ergebnis der Prediction ist eine Klassifizierung mit den jeweiligen Wahrscheinlichkeiten der zutreffenden Klasse. Der Wertebereich bewegt sich zwischen 0 und 1, wobei 1 als voll zutreffend gilt.  Das Ergebnis wird in ein Dictionary bestehend aus Klasse und Prediction-Value überführt und mit einem Statuscode 200 an den aufrufenden Client zurückgeschickt.
 \subsection{Frontend der Webanwendung}
+Das webbasierte Frontend dient als „Real-Welt-Anwendung“ um die Modelle außerhalb der Testdaten zu nutzen. Das Frontend wurde mithilfe von Angular, Angular Material und RxJS als Progressive Web APP programmiert und unter \url{https://jupiter.fh-swf.de/sign-language-classification/} zur Verfügung gestellt. Gehosted wird die Applikation sowie auch das Backend hinter einem nginx Webserver. Aufgeteilt wurde die Anwendung in die eigentliche Zeichenerkennung und einer Übersicht aller möglichen Handzeichen, erreichbar über das Menü in der Topbar. Die möglichen Handzeichen wurden mit Bildern modelliert, die die Hand von Vorne zeigen. Diese Bilder entstammen einem Icon-Set für das unter \ref{fingeralphabet} angesprochene amerikanische Fingeralphabet. Die tatsächliche Handstellung kann durch Rotation etwas abweichen, sodass Originalbilder einer menschlichen Hand in der Übersicht eingefügt wurden. Die Originalbilder stammen aus dem Trainingsdatensatz und sind über ein drüber fahren der Maus über das Handzeichen erreichbar. Die Auflösung der Originale ist mit 200x200 Pixeln nicht besonders hoch, aber ein erkennen der richtigen Handstellung ist Problemlos möglich. Die folgende Darstellung zeigt das d als Handzeichen als Icon und im Original.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.80\textwidth]{d}
+	\vspace*{-3mm}
+	\caption[D als Handzeichen als Icon und im Original]{Das d als Handzeichen als Icon und im Original.}
+	\label{fig:d}
+\end{figure}
+Auf der Seite für die Zeichenerkennung im Frontend kann mit dem Leerzeichen oder einem Klick auf „Start Prediction“ die Erkennung über eine Webcam gestartet werden. Der Zugriff auf die Webcam muss dabei aktiv vom Benutzer erlaubt werden. Frontendseitig wird mithilfe von Googles MediaPipe Hands die Hand im Bild in Echtzeit getracked. MediaPipe Hands besteht aus mehreren Modellen die über eine ML-Pipeline zusammenabreiten. Das erste Modell operiert auf dem gesamten Bild und findet die Handfläche. Das zweite Modell nutzt den Ausschnitt der gefundenen Handfläche und markiert 21 markante Punkte der Hand. MediaPipe Hands konnte mithilfe von TensorFlow.js Frontendseitig eingebunden und angesprochen werden. Das laden des Handtracking-Modells wird in der Datei \lstinline[language=pythoninline]|main.ts| durchgeführt und automatisch an das globale Window-Objekt gehangen.
+\begin{lstlisting}[language=javascript,firstnumber=16,caption={Laden der frontendseitigen MediaPipe Hands Modelle.},label=lst:loading_mediapipe_hands_models]
+(async () => {
+const model = await handpose.load();
+(window as any).tensorflowModel = model;
+platformBrowserDynamic().bootstrapModule(AppModule)
+.catch(err => console.error(err));
+})();
+\end{lstlisting}
+Sobald das Modell Frontendseitig registriert wurde, wird die Angular Applikation gestartet. Da das Frontend sich die Bibliothek lediglich zu Nutze macht und in das trainieren in ein Handtracking-Modell keine Eigenleistung investiert wurde, wird technisch nicht tiefer auf MediaPipe Hands eingegangen. Das Bild der Webcam wird normalerweise in einem HTML5 Video-Element dem Benutzer angezeigt. Aber da auf so ein Element weder gezeichnet noch Einzelbilder extrahiert werden können, wurde für die Ausgabe ein Canvas-Element genutzt. Die Hauptaufgabe der Frontendseitigen Handerkennung passiert in der Datei \lstinline[language=pythoninline]|webcam.component.ts| unter \lstinline[language=pythoninline]|src/app/sign-prediction/webcam/| in der Methode \lstinline[language=pythoninline]|estimateHands|. Hier wird nach auslesen der Höhe und Breite des Video- und Canvas-Elements das Bild der Webcam in das Canvas übertragen. Dazu wird der Rendering-Context des Canvas-Elements genutzt und das Video-Element zuvor ausgeblendet. Über die zuvor angesprochene globale Variable kann auf das Handtracking-Modell zugegriffen werden und das aktuelle Webcam-Bild übergeben werden. Sollte eine Hand gefunden werden, werden die Koordinaten extrahiert und in einen mit RxJS erstellten Stream übergeben.
+\begin{lstlisting}[language=javascript,firstnumber=124,caption={Erkennen einer Hand mit MediaPipe Hands.},label=lst:estimate_hands]
+private async estimateHands() {
+
+const videoWidth = this.video.nativeElement.videoWidth;
+const videoHeight = this.video.nativeElement.videoHeight;
+const canvasWidth = this.overlay.nativeElement.width;
+const canvasHeight = this.overlay.nativeElement.height;
+
+this.renderingContext.drawImage(
+this.video.nativeElement, 0, 0, videoWidth, videoHeight, 0, 0, canvasWidth,
+canvasHeight);
+
+if (this.isPredictionActive) {
+const model: HandPose = (window as any).tensorflowModel;
+const hands: Array<any> = await model.estimateHands(this.video.nativeElement);
+const boundingBox = hands.length > 0 ?
+{ topLeft: hands[0].boundingBox.topLeft, bottomRight: hands[0].boundingBox.bottomRight } :
+{ topLeft: ['0', '0'], bottomRight: ['0', '0'] };
+
+
+this.croppedRenderingContext.clearRect(0, 0,
+this.croppedCanvas?.nativeElement.width,
+this.croppedCanvas?.nativeElement.height);
+
+this.ngZone.run(() =>
+this.boundingBoxSubject.next(boundingBox)
+);
+}
+
+if (this.isPredictionActive) {
+requestAnimationFrame(this.estimateHands.bind(this));
+}
+}
+\end{lstlisting}
+Mithilfe der \lstinline[language=pythoninline]|requestAnimationFrame| Methode, wird pro Frame die Methode \lstinline[language=pythoninline]|estimateHands| erneut aufgerufen, bis der Benutzer abbricht. Das Handtracking wird mithilfe von WebGL auf der Grafikkarte ausgeführt, sodass es ohne Grafikkarte zu FPS Einbrüchen kommen kann. Der RxJS Stream kümmert sich nachgelagert um das einzeichnen einer roten Box um die Hand des Benutzers.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.80\textwidth]{webcam_image}
+	\vspace*{-3mm}
+	\caption[Bild der Webcam]{Bild der Webcam, welche an das Backend übertragen wird.}
+	\label{fig:webcam}
+\end{figure}
+In einem 1.5 Sekunden-Intervall wird das aktuelle Bild der Webcam an das Python Backend übertragen und das Ergebnis im Frontend visualisiert. Da das trainierte Modell für das Fingeralphabet auch eine Klasse für „kein Handzeichen des Fingeralphabets“ hat, wird das Bild auch ohne erkannte Hand im Frontend übertragen. Sollte mit ablaufen des Intervalls im Frontend eine Hand erkannt worden sein, wird diese quadratisch anhand der Box ausgeschnitten. Dies erleichtert dem Anwender die Positionierung der Hand in eine möglichst optimale Hintergrundumgebung ohne ablenkende Objekte oder Farben. Diese Optimierung war nötig, da die Trainingsdaten stark auf die Hand fokussiert sind und Hintergründe mit markanten Formen die Erkennung trotz der automatischen Merkmalerkennung eines Konvolutionellen neuronalen Netzes beeinflusst haben. Das Intervall ist momentan nicht konfigurierbar und wurde als guter Mittelwert für ungeübte Nutzer des Fingeralphabets eingesetzt. Während des Betriebs kann das aktuelle Modell mit der Auswahlbox über der Webcam-Ausgabe gewechselt werden, ohne das Tracking zu beenden. 
+\\\\
+Neben den Koordinaten der Hand erkennt das frontendseitige Modell wie bereits erwähnt zusätzlich 21 Punkte auf der Hand, wodurch die Fingerstellung genau abgelesen werden kann.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.80\textwidth]{mediapipe_finger}
+	\vspace*{-3mm}
+	\caption[Punktedarstellung eines Handzeichen in Mediapipe]{Punktedarstellung eines Handzeichen in Mediapipe.}
+	\label{fig:mediapipe_finger}
+\end{figure}
+Dies hätte die Vorhersage des Fingeralphabets stark vereinfacht und die Bildverarbeitung ersetzen können. Da das Projekt aber mit Konvolutionellen neuronalen Netze auf Bildklassifizierung abzielt, wurde in diesem Projekt die Möglichkeit nicht berücksichtigt.
 \subsection{Ergebnisse der Entwicklung}
+Aufgrund der geringen Informationsdichte und der daraus vermutlich resultierenden schlechten „Real-Ergebnisse“ wurde der Sign Language MNIST Datensatz schnell verworfen. Für den ASL Alphabet Datensatz wurde per zufälligem Ziehen ein Testdatensatz mit 300 Elementen angelegt. Auf Basis der Ordner-Struktur konnte mit der Funktion \lstinline[language=pythoninline]|image_dataset_from_directory| zügig ein Dataset zum Trainieren eines Modells erstellt werden. Sämtliche Trainingsläufe wurden wie unter 5.1.2 beschrieben geloggt und konnten so jederzeit nachvollzogen und erneut erzeugt werden. Die einfachen neuronalen Netze konnten lediglich auf dem kleinen Sign Language MNIST Datensatz sinnvoll trainiert werden. Die Vorhersagengenauigkeit lag je nach Datensatz aber lediglich zwischen 67\% und 81\% auf den jeweiligen Testdaten. Die trainierten Konvolutionellen Neuronalen Netze konnten auf dem ASL Alphabet Datensatz über 99\% Vorhersagengenauigkeit auf Test- und Validierungsdaten erreichen und wurden nur mithilfe von Transfer Learning eines VGG19 Modells überboten. Die guten Ergebnisse waren wenig überraschend, da CNNs als defacto Standard für Bildverarbeitung gelten. Auch eine Konfusionsmatrix zeigt, dass es unter den sehr geringen Fehlern keine besonderen Ausreißer gibt, obwohl sich einige Buchstaben recht ähnlich sind.  Somit wurde das VGG19 Modell als Standard im Frontend hinterlegt. Das Python Backend ist in der Lage die unterschiedlichen Modelle in den Speicher zu laden und Bilder mit und ohne Base 64 Kodierung zu verarbeiten. Die Modelle sind über unterschiedliche Endpunkte per HTTP direkt ansprechbar und eine Prediction dauert unter 100ms Millisekunden. Die im Backend hinterlegten Modelle können abgefragt werden.  Das Frontend visualisiert die möglichen Handzeichen und ist in der Lage über die Webcam und MediaPipe Hands die Hand zu tracken. In einem Intervall von 1.5 Sekunden wird das aktuelle Bild an das Backend übertragen und das Ergebnis dem Benutzer angezeigt. Damit konnte die geplante Entwicklung im Rahmen dieses Projekts erfolgreich abgeschlossen werden.
 \section{Fazit} 
+Das Projekt hat neben den theoretischen Grundlagen von Machine Learning, einfache Neuronale Netze, Konvolutionelle Neuronale Netze und Transfer Learning näher beleuchtet. Die besten Modelle erreichten nahezu 100\% Vorhersagegenauigkeit auf Test- und Validierungsdaten. Darüber hinaus wurden die Modelle in eine Anwendung integriert und die Vorhersagen auf echten Daten zu prüfen. Trotz der ausgezeichneten Ergebnisse auf den Datensätzen zeigen sich schwächen mit Echt-Daten. Eine richtige Vorhersage der Handzeichen kann mit etwas Übung des Benutzers zwar erreicht werden, aber die Positionierung vor der Webcam nimmt noch zu großen Einfluss. Markante Formen und Farben die in den Bildausschnitt der Hand hineinragen erschweren zusätzlich die Erkennung, sodass der Benutzer nach Möglichkeit einen ruhigen Hintergrund wählen sollte. Auch wenn die aus diesem Projekt hervorgegangene Applikation noch nicht für eine reale Nutzung vollends geeignet ist, sind die End-Ergebnisse zufriedenstellend. Vor allem mit dem Hintergrund, dass die Applikation bestehend aus Frontend und Backend vordergründig als On-Top Ergänzung zu den trainierten Modellen gedacht war. Uns war es aber wichtig in diesem Projekt eine Applikation zu implementieren, da die Schwierigkeit beim Machine Learning gerade darin besteht, die Modelle Praxis-Tauglich aus dem Test-Labor in die echte Welt zu übertragen.   
 \section{Ausblick}
+Während der Planung und Entwicklung des Projekts sind einige Punkte aufgefallen, die zur Verbesserung zusätzlich umgesetzt werden könnten. Um im Rahmen des Projektumfangs zu bleiben, werden diese anschließend nur in schriftlicher Form vorgestellt.
+\subsection{Data Augmentation}
+Der genutzte ASL Alphabet Datensatz hat mit 87000 Bildern bereits eine angemessene Größe. Die Bilder scheinen allerdings alle von einer Person erzeugt worden zu sein. Die Bilder für einen Buchstaben unterscheiden sich zwar stärker als im Sign Language MNIST Datensatz, aber dennoch deutlich weniger als mit unterschiedlichen Personen. So könnten die Bilder manuell rotiert und umpositioniert werden, um einen breiteren Datensatz zu erzeugen und so ein besseres Ergebnis auf „Real-Daten“ zu erhalten.
+\subsection{Ausbau des Traingsdatensatzes}
+Alternativ zur Data Augmentation könnte der Datensatz durch Real-Daten erweitert werden. Das Frontend sendet sämtliche Bilder Base 64 kodiert an das Python Backend. Diese Bilder könnten gespeichert und manuell klassifiziert werden. Auf lange Sicht könnte der bestehende Datensatz sogar ersetzt werden um das Ergebnis an den Bildern der Webcam anzupassen und zu verbessern.
+\subsection{Perfomance des Frontends}
+Das Frontend arbeitet selbst mit einem großen Modell mithilfe von TensorFlow.js, um die Hand in dem Bild der Webcam zu finden. Dies erlaubt es dem Benutzer Feedback zu geben und die Hand bereits Frontendseitig auszuschneiden. Das Modell wird mit WebGL direkt auf der Grafikkarte ausgeführt und wird mit dem Start der Applikation geladen. Insgesamt werden ca. 15MB übertragen, welche für eine durchschnittliche Interleitung keine Probleme darstellen. Dennoch könnte die Startzeit der Applikation mit geringerer Dateigröße verringert werden. Außerdem ist eine dedizierte Einsteiger-Grafikkarte vorauszusetzen um ein flüssiges Arbeiten zu garantieren. Mit dem Verzicht auf das Handtracking, könnte das Modell wegfallen und die Aufbereitung aus dem Frontend in das Backend übertragen werden. So wäre ein flüssiges Arbeiten mit dem Frontend auf nahezu jeder Hardware möglich.
+\subsection{Textausgabe im Frontend}
+Momentan wird im Frontend der erkannte Buchstabe hervorgehoben. Das trainierte Modell bietet zusätzlich noch die Klassen Space und Delete, die dazu genutzt werden könnten eine sinnvolle Textausgabe auf Basis der Vorhersagen zu realisieren. 
+\subsection{Intervall der Handzeichenerkennung}
+Zurzeit ist das Intervall in dem das Bild der Webcam an das Backend übertragen wird auf ungeübte Nutzer ausgelegt. Dank der geringen Antwortzeit des Backends von unter 100ms, könnte das Intervall deutlich verringert werden. Dadurch wäre ein deutlich flüssigeres Arbeiten mit dem Frontend möglich. Alternativ könnte auf das Intervall gänzlich verzichtet werden, indem das frontendseitige Handtracking als Grundlage genutzt wird. Dazu könnte ein gewisses Delta für die Handkoordinaten im Bild festgelegt werden. Sobald dieses Delta überschritten wurde, wird ein neues Zeichen oder ein wiederholtes gleiches Zeichen angenommen und das Backend angesprochen. 
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 \pagebreak

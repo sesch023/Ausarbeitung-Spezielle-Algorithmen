@@ -1,26 +1,26 @@
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {1}Kreuzentropie}{7}{equation.3.1}
+\contentsline {myequations}{\numberline {1}Kreuzentropie}{10}{equation.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {2}Vorhersagegenauigkeit}{8}{equation.3.2}
+\contentsline {myequations}{\numberline {2}Vorhersagegenauigkeit}{11}{equation.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {3}Recall}{8}{equation.3.3}
+\contentsline {myequations}{\numberline {3}Recall}{11}{equation.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {4}Precision}{9}{equation.3.4}
+\contentsline {myequations}{\numberline {4}Precision}{12}{equation.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {5}F1-Score}{9}{equation.3.5}
+\contentsline {myequations}{\numberline {5}F1-Score}{12}{equation.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {6}Mathematische Definition eines Künstlichen Neurons}{12}{equation.3.6}
+\contentsline {myequations}{\numberline {6}Mathematische Definition eines Künstlichen Neurons}{15}{equation.4.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {7}Schwellenwertfunktion eines Perzeptrons}{12}{equation.3.7}
+\contentsline {myequations}{\numberline {7}Schwellenwertfunktion eines Perzeptrons}{15}{equation.4.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {8}Matrizendarstellung eines einschichtigen Neuronalen Netzes}{14}{equation.3.8}
+\contentsline {myequations}{\numberline {8}Matrizendarstellung eines einschichtigen Neuronalen Netzes}{17}{equation.4.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {9}Mathematische Definition eines einschichtigen Neuronalen Netzes}{14}{equation.3.9}
+\contentsline {myequations}{\numberline {9}Mathematische Definition eines einschichtigen Neuronalen Netzes}{17}{equation.4.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {10}Ziel des Gradientenabstiegsverfahren}{14}{equation.3.10}
+\contentsline {myequations}{\numberline {10}Ziel des Gradientenabstiegsverfahren}{17}{equation.4.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {11}ReLU}{19}{equation.3.11}
+\contentsline {myequations}{\numberline {11}ReLU}{22}{equation.4.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {12}ELU}{19}{equation.3.12}
+\contentsline {myequations}{\numberline {12}ELU}{22}{equation.4.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {myequations}{\numberline {13}Softmax}{19}{equation.3.13}
+\contentsline {myequations}{\numberline {13}Softmax}{22}{equation.4.13}
