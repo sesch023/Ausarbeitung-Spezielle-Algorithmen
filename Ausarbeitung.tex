@@ -416,6 +416,7 @@ In praktisch allen Fällen können Algorithmen des Maschinellen Lernens nicht mi
 	\item Klassen-IDs: Die vorher angegebene Menge von Klassenbezeichnungen könnte in eine Menge von repräsentierenden IDs transformiert werden. So wird die Menge \ensuremath{\{a, b, c \}} in die IDs \ensuremath{\{0, 1, 2 \}} umgewandelt. Der Algorithmus muss bei der Klassifikation nun eine korrekte IDs vorhersagen, welche eine Klasse repräsentiert. Aufgrund der Arbeitsweise vieler Algorithmen nehmen diese allerdings an, dass IDs, die näher beieinander liegen, zueinander ähnlicher sind. Dies ist nicht für alle Problemstellungen ideal \cite[S.12]{BA}\cite[S.63]{MACHINE_LEARNING}.
 	\item One-Hot-Kodierung: Bei diesem Verfahren wird für jede Klasse eine Zahl in einem Vektor reserviert. Eine vorliegende Klasse wird dann in der Regel mit einer 1 und der Rest der Elemente mit einer 0 markiert. Für die Beispielmenge \ensuremath{\{a, b, c \}} ergäbe sich daher die Menge von Vektoren \ensuremath{\{\left(\begin{smallmatrix}1 & 0 & 0\end{smallmatrix}\right), \left(\begin{smallmatrix}0 & 1 & 0\end{smallmatrix}\right), \left(\begin{smallmatrix}0 & 0 & 1\end{smallmatrix}\right)\}}. Korrekt klassifiziert wurde nun, wenn die vorliegenden Klassen mit den höchsten Vorhersagen markiert werden. Da in diesem Fall keine Beziehung zwischen den Klassen erkannt wird, ist diese Darstellung auch ideal für die betrachtete Problemstellung \cite[S.12]{BA}\cite[S.63]{MACHINE_LEARNING}.
 \end{itemize}
+\pagebreak
 Die bereits vorher erwähnte Kreuzentropie ist ein ideales Qualitätsmaß für Klassifikationsprobleme in der One-Hot-Kodierung. Niedrige Vorhersagen bei den vorliegenden Klassen werden dabei abgestraft, während andere Vorhersagen ignoriert werden. Für einen Datensatz mit \ensuremath{m} Tupeln, seinen One-Hot-kodierten Labels \ensuremath{\textbf{y}} mit \ensuremath{K}-Klassen und den One-Hot-kodierten Vorhersagen \ensuremath{\textbf{y'}} mit \ensuremath{K}-Klassen gilt \cite[S.13]{BA}\cite[S.63]{MACHINE_LEARNING}:
 \begin{equation}
 \label{eq:crossentropy}
@@ -508,6 +509,7 @@ Eine weitere beliebte Möglichkeit zur Validierung von Modellen ist die Kreuzval
 	\label{fig:crossvalidation}
 \end{figure}
 \vspace*{-5mm}
+\pagebreak
 \subsection{Neuronale Netze}
 In dieser Arbeit wurde sich, wie heutzutage üblich, bei der Bilderkennung auf Neuronale Netze und besonders die Konvolutionellen Neuronalen Netze fokussiert. Diese sind bei der Bilderkennung in vielen Bereichen State of the Art und werden von vielen bekannten vortrainierten Modellen wie dem VGG19 genutzt. Um diese zu verstehen, sollen allerdings erst die Grundlagen der Neuronalen Netze betrachtet werden.
 \subsubsection{Biologische Grundlagen}
@@ -654,6 +656,7 @@ Mit diesen Aktivierungsfunktionen können bereits einige typische Probleme beim 
 f_{akt} = \frac{e^{s_i}}{\sum_{i=1}^{n}e^{s_i}}
 \end{aligned}
 \end{equation}\myequations{Softmax}
+\pagebreak
 \subsubsection{Regularisierungsverfahren}
 Zuletzt werden nun zwei typische Regularisierungsverfahren für Neuronale Netze betrachtet, mit denen deren Performanz auf bestimmte Weisen erhöht werden kann.
 \\\\
@@ -877,6 +880,7 @@ model.fit(train_ds,
 	callbacks=[tensorboard_callback, checkpoint, es])
 \end{lstlisting}
 Nach dem Trainingsvorgang wird nun die beste Epoche aus dem Logverzeichnis geladen und mit den Testdaten überprüft. Dann wird zunächst die \lstinline[language=pythoninline]|evaluate| Methode des Keras-Modells genutzt, um eine Vorhersagegenauigkeit und den Fehler der Testdaten zu bestimmen. Zum Schluss wird mittels Scikit-Learn in der eigens definierten \lstinline[language=pythoninline]|evaluate| Funktion eine Konfusionsmatrize und Auswertungstabelle mit Precision, Recall und F1-Score zu den Testdaten erstellt. Dies ist im folgenden Listing erkennbar:
+\pagebreak
 \begin{lstlisting}[language=python,firstnumber=1,caption={Auswertung eines Modells mit Testdaten},label=lst:modell_eval]
 # Lade das beste Modell
 model = load_model(run_path + "model.mdl_wts.hdf5")
