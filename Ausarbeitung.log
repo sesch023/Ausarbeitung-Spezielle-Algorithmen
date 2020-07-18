@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.9.30)  18 JUL 2020 19:19
+This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.9.30)  18 JUL 2020 19:50
  restricted system commands enabled.
 **Ausarbeitung.tex
 (./Ausarbeitung.tex
@@ -34,7 +34,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.063 seconds
+luaotfload | main : initialization completed in 0.064 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2017/09/07 v3.24 KOMA-Script document class (article)
@@ -3704,20 +3704,20 @@ r Da-tei [][]
 Overfull \vbox (1.10608pt too high) has occurred while \output is active []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1041.
+(babel)             in language  on input line 1042.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1041.
+(babel)             in language  on input line 1042.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1041.
+(babel)             in language  on input line 1042.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1041.
+(babel)             in language  on input line 1042.
 
 [46]
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1058.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1058.
-<d.png, id=1026, 960.15857pt x 556.22089pt>
+<d.png, id=1029, 960.15857pt x 556.22089pt>
 File: d.png Graphic file (type png)
 <use d.png>
 Package luatex.def Info: d.png  used on input line 1062.
@@ -3774,7 +3774,7 @@ Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1105.
 
 [49]
-<webcam_image.png, id=1089, 508.14844pt x 420.82219pt>
+<webcam_image.png, id=1090, 508.14844pt x 420.82219pt>
 File: webcam_image.png Graphic file (type png)
 <use webcam_image.png>
 Package luatex.def Info: webcam_image.png  used on input line 1116.
@@ -3785,7 +3785,7 @@ Overfull \hbox (10.63422pt too wide) in paragraph at lines 1113--1120
 -ne Gra-fik-kar-te zu FPS-Einbrüchen
  []
 
-<mediapipe_finger.png, id=1090, 481.8pt x 254.45062pt>
+<mediapipe_finger.png, id=1091, 481.8pt x 254.45062pt>
 File: mediapipe_finger.png Graphic file (type png)
 <use mediapipe_finger.png>
 Package luatex.def Info: mediapipe_finger.png  used on input line 1126.
@@ -4015,10 +4015,10 @@ ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1
 msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfon
 t/lcircle1.pfb>
-Output written on Ausarbeitung.pdf (64 pages, 9083916 bytes).
+Output written on Ausarbeitung.pdf (64 pages, 9083963 bytes).
 
-PDF statistics: 1251 PDF objects out of 1440 (max. 8388607)
- 1079 compressed objects within 11 object streams
+PDF statistics: 1252 PDF objects out of 1440 (max. 8388607)
+ 1080 compressed objects within 11 object streams
  413 named destinations out of 1000 (max. 131072)
  392 words of extra memory for PDF output out of 10000 (max. 100000000)
 
