@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.9.30)  17 JUL 2020 17:38
+This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.9.30)  18 JUL 2020 15:42
  restricted system commands enabled.
 **Ausarbeitung.tex
 (./Ausarbeitung.tex
@@ -34,7 +34,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.063 seconds
+luaotfload | main : initialization completed in 0.069 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2017/09/07 v3.24 KOMA-Script document class (article)
@@ -4016,7 +4016,7 @@ ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1
 msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfon
 t/lcircle1.pfb>
-Output written on Ausarbeitung.pdf (64 pages, 9083874 bytes).
+Output written on Ausarbeitung.pdf (64 pages, 9083862 bytes).
 
 PDF statistics: 1251 PDF objects out of 1440 (max. 8388607)
  1079 compressed objects within 11 object streams
